@@ -1,8 +1,6 @@
 <svg width="575" height="500" viewBox="0 0 575 500" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_8_2)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M375 0H0V500H375V400H125V100H375V0Z" fill="white"/>
-<rect x="250" y="100" width="125" height="100" fill="white"/>
-<rect x="250" y="300" width="125" height="100" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H250H375V100V200H250V100H125V400H250V300H375V400V500H250H0V0Z" fill="white"/>
 <rect x="500" width="75" height="500" fill="white"/>
 </g>
 <defs>

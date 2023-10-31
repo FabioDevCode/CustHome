@@ -9,8 +9,7 @@ import { ref } from 'vue';
 const sMode = modeStore()
 const Config = configStore()
 
-
-const logo = ref('https://fabiolopes844606271.files.wordpress.com/2018/03/prft.png');
+const logo = ref('http://localhost:5173/public/CustHome_Logo.svg');
 
 
 </script>
