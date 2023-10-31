@@ -1,8 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import { modeStore } from '@/stores/mode';
-
 const sMode = modeStore()
+import { configStore } from '@/stores/config';
+const Config = configStore()
+
+
+
 
 
 
@@ -16,15 +20,11 @@ function toggleMode() {
             break;
     }
 };
-
-// function openMenu() {
-//     sMode.$toggleMenu();
-// }
 </script>
 
 
 <template>
-    <nav>
+    <nav :class="Config.theme">
         <ul>
             <li id="mode">
                 <button @click="toggleMode()">
@@ -32,7 +32,7 @@ function toggleMode() {
                 </button>
             </li>
 
-            <li id="pencil">
+            <li id="pencil" @click="Config.$toggleTheme()">
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a1.5 1.5 0 0 0-4-4L4 16v4"></path><path d="M13.5 6.5l4 4"></path></g></svg>
                 </button>
@@ -48,6 +48,26 @@ function toggleMode() {
 
 
 <style scoped>
+    /* DARK THEME */
+    .dark ul li button {
+        background-color: #CFD8DC;
+    }
+    .dark ul li button:hover {
+        background-color: #ECEFF1;
+    }
+
+
+    /* LIGHT THEME */
+    .light ul li button {
+        background-color: #212121;
+        color: whitesmoke;
+    }
+    .light ul li button:hover {
+        background-color: #323232;
+    }
+
+
+    /* OTHERS CSS PROPERTIES */
     nav {
         overflow: hidden;
         width: 100%;
@@ -61,16 +81,16 @@ function toggleMode() {
 
     nav ul {
         height: max-content;
-        width: 140px;
+        width: 110px;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
     nav ul li {
-        height: 40px;
-        width: 40px;
-        border-radius: 50px;
+        height: 30px;
+        width: 30px;
+        border-radius: 5px;
         color: black;
         display: flex;
         justify-content: center;
@@ -78,24 +98,18 @@ function toggleMode() {
     }
 
     nav ul li button {
-        cursor: pointer;
         height: 100%;
         width: 100%;
-        border-radius: 100%;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        background-color: whitesmoke;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        border-radius: 5px;
     }
 
     nav ul li button:active {
-        transform: scale(.95);
+        transform: scale(.98);
     }
 
     nav ul li button svg {
-        height: 26px;
-        width: 26px;
+        height: 22px;
+        width: 22px;
 
     }
 

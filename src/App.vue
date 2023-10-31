@@ -1,19 +1,22 @@
 <script setup>
 import { modeStore } from '@/stores/mode';
+import { configStore } from '@/stores/config';
 import Search from '@/components/Search.vue';
 import Nav from '@/components/Nav.vue';
+import Menu from '@/components/Menu.vue'
 import { ref } from 'vue';
 
 const sMode = modeStore()
+const Config = configStore()
 
-const logo = ref('https://raw.githubusercontent.com/FabioDevCode/FabioDevCode/main/assets/fabiodevcode_new-logo.png');
 
+const logo = ref('https://fabiolopes844606271.files.wordpress.com/2018/03/prft.png');
 
 
 </script>
 
 <template>
-	<section>
+	<section :id="Config.theme">
 		<main>
 			<Transition>
 				<div id="pro-logo" class="global" v-if="sMode.mode === 'pro'">
@@ -52,53 +55,54 @@ const logo = ref('https://raw.githubusercontent.com/FabioDevCode/FabioDevCode/ma
 	</section>
 
 	<Transition name="slide-fade">
-		<div v-if="sMode.menu" class="overlay-menu">
-			<div id="menu-bar">
-				<button @click="sMode.$toggleMenu()">
-					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path d="M289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34z" fill="currentColor"></path></svg>
-				</button>
-
-				<ul>
-					<li>
-						List menu 1
-					</li>
-					<li>
-						List menu 1
-					</li>
-					<li>
-						List menu 1
-					</li>
-				</ul>
-			</div>
-		</div>
+		<Menu />
 	</Transition>
 </template>
 
 
 <style scoped>
+	/* DARK THEME */
+	#dark {
+		background-color: var(--dark-bg);
+	}
+	#dark main {
+		background-color: var(--dark-bg);
+	}
+	#dark main .global {
+		background-color: var(--dark-bg);
+	}
+
+
+	/* LIGHT THEME */
+	#light {
+		background-color: var(--light-bg);
+	}
+	#light main {
+		background-color: var(--light-bg);
+	}
+	#light main .global {
+		background-color: var(--light-bg);
+	}
+
+
+
 	.global {
 		padding: 10px;
-		background-color: lightskyblue;
-		background-color: #22272E;
-		box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 		border-radius: 10px;
 	}
 
 	section {
 		overflow: hidden;
-		background-color: whitesmoke;
-		background-color: #151515;
+		position: relative;
 		height: 100vh;
 		width: 100%;
-		padding: 10px;
+		padding: 20px;
 	}
 
 	main {
-		min-height: 100%;
+		height: 100%;
 		width: 100%;
-		/* background-color: goldenrod; */
 		border-radius: 10px;
-
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
 		grid-gap: 10px;
@@ -107,18 +111,20 @@ const logo = ref('https://raw.githubusercontent.com/FabioDevCode/FabioDevCode/ma
 
 	/* PRO TEMPLATE */
 	#pro-logo {
+		position: relative;
+		/* background-color: crimson; */
 		grid-column: 1 / 5;
-  		grid-row: 1 / 6;
+  		grid-row: 1 / 5;
 
 		display: flex;
 		justify-content: center;
-		align-items: center;
+		align-items: flex-end;
 	}
 
 	#pro-logo img {
 		/* display: block; */
 		max-width: 80%;
-		max-height: 80%;
+		max-height: 60%;
 		width: auto;
   		height: auto;
 	}
@@ -126,7 +132,7 @@ const logo = ref('https://raw.githubusercontent.com/FabioDevCode/FabioDevCode/ma
 
 	#pro-search {
 		grid-column: 1 / 5;
-  		grid-row: 6 / 9;
+  		grid-row: 5 / 9;
 	}
 
 	#pro-link {
@@ -156,55 +162,6 @@ const logo = ref('https://raw.githubusercontent.com/FabioDevCode/FabioDevCode/ma
 		grid-column: 1 / 13;
 		grid-row: 2 / 9;
 	}
-
-
-
-    .overlay-menu {
-        position: absolute;
-        height: 100vh;
-        width: 100%;
-		padding: 10px;
-		display: flex;
-		justify-content: flex-end;
-		top: 0;
-        background-color: rgba(0, 0, 0, .5);
-    }
-
-	#menu-bar {
-		height: 100%;
-		width: min(100%, 400px);
-		border-radius: 10px;
-		padding: 15px;
-		background-color: #1b2125;
-
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-
-	}
-
-	#menu-bar button {
-		cursor: pointer;
-		height: 40px;
-		width: 40px;
-        border-radius: 100%;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        background-color: whitesmoke;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-	}
-
-	#menu-bar ul {
-		height: max-content;
-		min-height: 300px;
-		width: 100%;
-		border-radius: 5px;
-		margin: 20px 0;
-		background-color: #232934
-	}
-
-
 
 
 	.v-enter-active,

@@ -1,9 +1,24 @@
+:root {
+	--dark-bg: #151515;
+	--light-btn: #CFD8DC; /* blue-grey-lighten-4 */
+	--light-btn-hov: #ECEFF1; /* blue-grey-lighten-5 */
+
+	--main-color: #1E88E5; /* blue-darken-1 */
+	--main-color-hov: #42A5F5; /* blue-lighten-1 */
+
+	--light-bg: #ECEFF1;
+
+
+
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	font-family: 'Raleway', sans-serif;
 	font-weight: 400;
+	transition: background-color 200ms ease-in-out;
 }
 
 input {
@@ -13,6 +28,10 @@ input {
 
 button {
 	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 ul, ol, li {

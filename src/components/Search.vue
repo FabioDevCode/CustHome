@@ -1,17 +1,19 @@
 <script setup>
 import { toast } from 'vue3-toastify';
 import { ref } from 'vue';
+import { configStore } from '@/stores/config';
+const Config = configStore()
 
 const val = ref('');
 
 
 function openTabWithSearch(tag) {
     if(!val.value.trim().length) {
-        toast.error('Le champ de recherche est vide.', {
-            position: 'top-left',
-            theme: 'light',
-            autoClose: 5000
-        })
+        // toast.error('Le champ de recherche est vide.', {
+        //     position: 'top-left',
+        //     theme: 'light',
+        //     autoClose: 5000
+        // })
     }
 
     if(val.value.trim().length && tag) {
@@ -51,14 +53,13 @@ function prepareUrl(tag) {
             </button>
         </form>
 
-        <ul id="btn-search">
+        <ul id="btn-search" :class="Config.theme">
             <li>
                 <button @click="openTabWithSearch('classic')">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path d="M456.69 421.39L362.6 327.3a173.81 173.81 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3zM97.92 222.72a124.8 124.8 0 1 1 124.8 124.8a124.95 124.95 0 0 1-124.8-124.8z" fill="currentColor"></path></svg>
                     <p>Recherche Classique</p>
                 </button>
             </li>
-
             <li>
                 <button @click="openTabWithSearch('images')">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path d="M456 64H56a24 24 0 0 0-24 24v336a24 24 0 0 0 24 24h400a24 24 0 0 0 24-24V88a24 24 0 0 0-24-24zm-124.38 64.2a48 48 0 1 1-43.42 43.42a48 48 0 0 1 43.42-43.42zM76 416a12 12 0 0 1-12-12v-87.63L192.64 202l96.95 96.75L172.37 416zm372-12a12 12 0 0 1-12 12H217.63l149.53-149.53L448 333.84z" fill="currentColor"></path></svg>
@@ -89,10 +90,31 @@ function prepareUrl(tag) {
 
 
 <style scoped>
+    /* DARK THEME */
+    .dark li button {
+        background-color: #CFD8DC;
+        color: black;
+    }
+    .dark li button:hover {
+        background-color: #ECEFF1;
+    }
+
+
+    /* LIGHT THEME */
+    .light li button {
+        background-color: #212121;
+        color: whitesmoke;
+    }
+    .light li button:hover {
+        background-color: #323232;
+    }
+
+
+    /* OTHERS CSS PROPERTIES */
     #bloc-search {
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: flex-start;
         align-items: center;
 		border-radius: 5px;
         padding: 5px;
@@ -105,8 +127,9 @@ function prepareUrl(tag) {
         justify-content: center;
         height: 50px;
         width: 100%;
-        border-radius: 50px;
+        border-radius: 5px;
         overflow: hidden;
+        margin-bottom: 20px;
         background-color: whitesmoke;
         border: 1px solid whitesmoke;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -116,7 +139,7 @@ function prepareUrl(tag) {
         font-size: 1em;
         height: 100%;
         width: calc(100% - 50px);
-        border-radius: 50px;
+        border-radius: 5px;
         background-color: whitesmoke;
         padding: 0 20px;
     }
@@ -126,11 +149,10 @@ function prepareUrl(tag) {
     }
 
     #bloc-search form button {
-        cursor: pointer;
         background-color: whitesmoke;
         height: 50px;
         width: 50px;
-        border-radius: 60px;
+        border-radius: 5px;
     }
 
     #bloc-search form button svg {
@@ -156,13 +178,9 @@ function prepareUrl(tag) {
     }
 
     #btn-search li button {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         width: 100%;
         height: 50px;
-        border-radius: 50px;
+        border-radius: 5px;
         padding: 5px;
     }
 
