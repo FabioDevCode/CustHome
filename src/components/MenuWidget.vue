@@ -1,69 +1,26 @@
 <script setup>
 import { modeStore } from '@/stores/mode';
 import { configStore } from '@/stores/config';
+
 const mode = modeStore()
 const config = configStore()
-
 
 </script>
 
 
 <template>
-    <div v-if="mode.menu" :class="config.theme" id="overlay-menu">
+    <div v-if="mode.menu_widget" :class="config.theme" id="overlay-menu">
         <div class="menu-bar">
-            <button class="close-btn-menu" @click="mode.toggleMenu()">
+            <button class="close-btn-menu" @click="mode.toggleMenuWidget()">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path d="M289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34z" fill="currentColor"></path></svg>
             </button>
 
             <div class="menu-body">
-                <fieldset>
-                    <legend>Thème</legend>
-                    <div @click="config.setDark()">
-                        <input type="radio" id="dark-mono" name="theme" value="dark" checked />
-                        <label for="dark-mono">Dark</label>
-                    </div>
-                    <div @click="config.setLight()">
-                        <input type="radio" id="light-mono" name="theme" value="light" />
-                        <label for="light-mono">Light</label>
-                    </div>
-                </fieldset>
 
-                <fieldset>
-                    <legend>Page par défaut</legend>
-                    <div @click="mode.setPro()">
-                        <input type="radio" id="pro" name="default-mode" value="pro" checked />
-                        <label for="pro">Pro</label>
-                    </div>
-                    <div @click="mode.setHobbie()">
-                        <input type="radio" id="hobbie" name="default-mode" value="hobbie" />
-                        <label for="hobbie">Hobbie</label>
-                    </div>
-                </fieldset>
+                <h4>Menu des widgets</h4>
 
                 <hr>
 
-                <h4>Importer une configuration</h4>
-
-                <div class="file-container">
-                    <label for="dropzone-file">
-                        <div>
-                            <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                            </svg>
-                            <p class="first">
-                                <span>Click to upload</span> or drag and drop
-                            </p>
-                            <p class="second">JSON (CustHome_config.json)</p>
-                        </div>
-                        <input id="dropzone-file" type="file" accept="application/json" hidden />
-                    </label>
-                </div>
-
-                <hr>
-
-                <button id="export-config">
-                    Exporter ma configuration
-                </button>
             </div>
 
 
@@ -92,7 +49,7 @@ const config = configStore()
 <style scoped>
     /* DARK THEME */
     .dark {
-        background-color: rgba(0, 0, 0, .2);
+        background-color: rgba(0, 0, 0, .7);
     }
     .dark .menu-bar {
 		background-color: #1b2125;
@@ -108,8 +65,7 @@ const config = configStore()
         background-color: #ECEFF1;
     }
     .dark .menu-bar .menu-body {
-        /* background-color: #263238;
-        background-color: rgba(38, 50, 56, .3); */
+        background-color: #263238;
     }
     .dark .menu-body h4 {
         color: whitesmoke;
@@ -144,7 +100,7 @@ const config = configStore()
 
     /* LIGHT THEME */
     .light {
-        background-color: rgba(207, 216, 220, .2);
+        background-color: rgba(207, 216, 220, .7);
     }
     .light .menu-bar {
         background-color: #B0BEC5;
@@ -244,11 +200,12 @@ const config = configStore()
 		position: relative;
 		display: flex;
 		flex-direction: column;
+		padding: 5px;
 		height: max-content;
 		min-height: 300px;
 		width: 100%;
 		border-radius: 5px;
-		margin: 15px 0;
+		margin: 20px 0;
 	}
 
 	.menu-body fieldset {
@@ -342,9 +299,9 @@ const config = configStore()
 
 	#export-config {
 		cursor: pointer;
-		font-size: 1.1em;
-		font-weight: 400;
-		height: 50px;
+		font-size: 1em;
+		font-weight: 600;
+		height: 40px;
 		width: auto;
 		margin: 10px;
 		border-radius: 5px;

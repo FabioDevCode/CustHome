@@ -4,28 +4,34 @@ import { defineStore } from 'pinia'
 export const modeStore = defineStore('mode', () => {
     const mode = ref('pro');
     const menu = ref(false);
+    const menu_widget = ref(false);
     const edit = ref(false);
 
-    function $setPro() {
+    function setPro() {
         mode.value = 'pro'
     }
-    function $setHobbie() {
+    function setHobbie() {
         mode.value = 'hobbie'
     }
-    function $toggleMenu() {
+    function toggleMenu() {
         menu.value = !menu.value;
     }
-    function $toggleEdit() {
+    function toggleMenuWidget() {
+        menu_widget.value = !menu_widget.value;
+    }
+    function toggleEdit() {
         edit.value = !edit.value;
     }
 
     return {
         mode,
-        $setPro,
-        $setHobbie,
+        setPro,
+        setHobbie,
         menu,
-        $toggleMenu,
+        toggleMenu,
+        menu_widget,
+        toggleMenuWidget,
         edit,
-        $toggleEdit
+        toggleEdit
     }
 });

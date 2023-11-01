@@ -1,60 +1,64 @@
 <script setup>
 import { modeStore } from '@/stores/mode';
 import { configStore } from '@/stores/config';
-import Search from '@/components/Search.vue';
+// Widgets
+import Horloge from '@/components/widgets/Horloge.vue';
+import Google from '@/components/widgets/Google.vue';
+import Npm  from '@/components/widgets/Npm.vue';
+// Components
 import Nav from '@/components/Nav.vue';
 import Menu from '@/components/Menu.vue'
-import { ref } from 'vue';
+import MenuWidget from '@/components/MenuWidget.vue';
 
-const sMode = modeStore()
-const Config = configStore()
 
-const logo = ref('http://localhost:5173/public/CustHome_Logo.svg');
+const mode = modeStore()
+const config = configStore()
 
 
 </script>
 
 <template>
-	<section :id="Config.theme">
+	<section :id="config.theme">
 		<main>
 			<Transition>
-				<div id="pro-logo" class="global" v-if="sMode.mode === 'pro'">
-					<img :src="logo" alt="logo">
+				<div id="pro-widget" class="global" v-if="mode.mode === 'pro'">
+					<Horloge class="widget" />
+					<Google class="widget" />
+					<Npm class="widget" />
 				</div>
 			</Transition>
 
 			<Transition>
-				<div id="pro-search" class="global" v-if="sMode.mode === 'pro'">
-					<Search />
-				</div>
-			</Transition>
-
-			<Transition>
-				<div id="pro-link" class="global" v-if="sMode.mode === 'pro'">
+				<div id="pro-title" class="global" v-if="mode.mode === 'pro'">
 					<Nav class="nav" />
+				</div>
+			</Transition>
+
+			<Transition>
+				<div id="pro-link" class="global" v-if="mode.mode === 'pro'">
 
 				</div>
 			</Transition>
 
 			<!-- TEMPLATE -->
-
 			<Transition>
-				<div id="hobbie-title" class="global" v-if="sMode.mode === 'hobbie'">
+				<div id="hobbie-title" class="global" v-if="mode.mode === 'hobbie'">
 					<Nav class="nav" />
 				</div>
 			</Transition>
-
 			<Transition>
-				<div id="hobbie-link" class="global" v-if="sMode.mode === 'hobbie'">
+				<div id="hobbie-link" class="global" v-if="mode.mode === 'hobbie'">
 
 				</div>
 			</Transition>
-
 		</main>
 	</section>
 
 	<Transition name="slide-fade">
 		<Menu />
+	</Transition>
+	<Transition name="slide-fade">
+		<MenuWidget />
 	</Transition>
 </template>
 
@@ -109,47 +113,36 @@ const logo = ref('http://localhost:5173/public/CustHome_Logo.svg');
 	}
 
 	/* PRO TEMPLATE */
-	#pro-logo {
-		position: relative;
-		/* background-color: crimson; */
+	#pro-widget {
+		overflow: hidden;
 		grid-column: 1 / 5;
-  		grid-row: 1 / 5;
-
-		display: flex;
-		justify-content: center;
-		align-items: flex-end;
+  		grid-row: 1 / 9;
 	}
 
-	#pro-logo img {
-		/* display: block; */
-		max-width: 80%;
-		max-height: 60%;
-		width: auto;
-  		height: auto;
+	#pro-widget .widget {
+		margin-bottom: 10px;
 	}
 
-
-	#pro-search {
-		grid-column: 1 / 5;
-  		grid-row: 5 / 9;
+	#pro-widget .w-horloge {
+		grid-row: 1 / 3;
 	}
+
 
 	#pro-link {
+		overflow: hidden;
 		grid-column: 5 / 13;
-  		grid-row: 1 / 9;
-
+  		grid-row: 2 / 9;
 		display: grid;
 		grid-template-columns: repeat(9, 1fr);
 		grid-gap: 10px;
 		grid-template-rows: repeat(8, 1fr);
 	}
 
-	#pro-link .nav {
-		grid-column: 1 / 10;
+	#pro-title {
+		overflow: hidden;
+		grid-column: 5 / 13;
 		grid-row: 1 / 2;
 	}
-
-
 
 	/* HOBBIE TEMPLATE */
 	#hobbie-title {
