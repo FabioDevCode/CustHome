@@ -44,6 +44,7 @@ onMounted(() => {
 
 <style scoped>
     #horloge {
+        overflow: hidden;
         font-family: 'Chakra Petch', sans-serif;
         border-radius: 5px;
         width: 100%;
