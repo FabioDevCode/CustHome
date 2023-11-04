@@ -1,15 +1,15 @@
 <script setup>
 import { modeStore } from '@/stores/mode';
-import { configStore } from '@/stores/config';
+import { saveStore } from '@/stores/save';
 
 const mode = modeStore()
-const config = configStore()
+const save = saveStore()
 
 </script>
 
 
 <template>
-    <div v-if="mode.menu_widget" :class="config.theme" id="overlay-menu">
+    <div v-if="mode.menu_widget" :class="save.theme" id="overlay-menu">
         <div class="menu-bar">
             <button class="close-btn-menu" @click="mode.toggleMenuWidget()">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path d="M289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34z" fill="currentColor"></path></svg>
@@ -298,7 +298,7 @@ const config = configStore()
         font-weight: 600;
     }
 
-	#export-config {
+	#export-save {
 		cursor: pointer;
 		font-size: 1em;
 		font-weight: 600;
@@ -308,7 +308,7 @@ const config = configStore()
 		border-radius: 5px;
 	}
 
-	#export-config:active {
+	#export-save:active {
 		transform: scale(.99);
 	}
 

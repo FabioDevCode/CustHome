@@ -2,7 +2,7 @@
 // import { toast } from 'vue3-toastify';
 import { ref } from 'vue';
 import { utilsStore } from '@/stores/utils';
-import google_logo from '@/assets/google_logo.png';
+import google_logo from '@/assets/img/google_logo.png';
 
 const utils = utilsStore();
 const val = ref('');

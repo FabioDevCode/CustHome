@@ -2,7 +2,7 @@
 // import { toast } from 'vue3-toastify';
 import { ref } from 'vue';
 import { utilsStore } from '@/stores/utils';
-import npm_logo from '@/assets/npm_logo.png';
+import npm_logo from '@/assets/img/npm_logo.png';
 
 const utils = utilsStore();
 const val = ref('');

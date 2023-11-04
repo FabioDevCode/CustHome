@@ -27,15 +27,15 @@ onMounted(() => {
 
 <template>
     <div id="horloge">
-        <p>
+        <p class="hours">
             {{ hours }}
         </p>
         <span>:</span>
-        <p>
+        <p class="mins">
             {{ mins }}
         </p>
         <span>:</span>
-        <p>
+        <p class="secs">
             {{ secs }}
         </p>
     </div>
@@ -66,9 +66,19 @@ onMounted(() => {
     #horloge p {
         display: inline-block;
         display: flex;
-        justify-content: start;
         align-items: center;
         width: 110px;
+    }
+
+    .hours {
+        justify-content: end;
+    }
+    .mins {
+        justify-content: center;
+
+    }
+    .secs {
+        justify-content: start;
     }
 
 </style>
