@@ -57,6 +57,10 @@ export const saveStore = defineStore('save', () => {
 
     function chooseTab(tab) {
         defaultTab.value = tab;
+
+        const localSave = JSON.parse(localStorage.getItem('CustHome'));
+        localSave.defaultTab = tab;
+        localStorage.setItem('CustHome', JSON.stringify(localSave));
     };
 
     function deleteTab(tab) {
