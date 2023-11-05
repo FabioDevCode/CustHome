@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import { toast } from 'vue3-toastify';
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 
@@ -12,6 +13,14 @@ const url = ref('');
 
 
 function saveNewLink() {
+    if(!name.value.length || !url.value.length) {
+        return toast.error("Un champ est vide.", {
+            theme: 'dark',
+            position: 'top-center',
+            autoClose: 2000,
+        });
+    }
+
     save.addNewLink({
         name: name.value,
         url: url.value

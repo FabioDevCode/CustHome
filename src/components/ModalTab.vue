@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue';
+import { toast } from 'vue3-toastify';
+
 // STORES
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
@@ -11,6 +13,14 @@ const save = saveStore();
 const new_tab = ref('');
 
 function addNewTabWithResetInput() {
+    if(!new_tab.value.length) {
+        return toast.error("Le champs est vide.", {
+            theme: 'dark',
+            position: 'top-center',
+            autoClose: 2000,
+        });
+    }
+
     save.addNewTab(new_tab.value);
     new_tab.value = '';
 };
