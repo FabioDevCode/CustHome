@@ -18,12 +18,12 @@ const save = saveStore()
 		<LogoCustHome class="nav-logo" />
 
         <ul>
-            <!-- <li>
+            <li>
                 <button @click="save.toggleWidget()">
                     <svg v-if="save.widget" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path d="M16.66 4.52l2.83 2.83l-2.83 2.83l-2.83-2.83l2.83-2.83M9 5v4H5V5h4m10 10v4h-4v-4h4M9 15v4H5v-4h4m7.66-13.31L11 7.34L16.66 13l5.66-5.66l-5.66-5.65zM11 3H3v8h8V3zm10 10h-8v8h8v-8zm-10 0H3v8h8v-8z" fill="currentColor"></path></svg>
                     <svg v-else xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><path d="M13 13v8h8v-8h-8zM3 21h8v-8H3v8zM3 3v8h8V3H3zm13.66-1.31L11 7.34L16.66 13l5.66-5.66l-5.66-5.65z" fill="currentColor"></path></svg>
                 </button>
-            </li> -->
+            </li>
 
 
             <li id="mode">

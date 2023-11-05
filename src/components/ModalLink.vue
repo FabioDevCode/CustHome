@@ -27,7 +27,7 @@ function saveNewLink() {
 <template>
     <div id="modal-link" v-if="mode.addLink">
         <form @submit.prevent>
-            <h4>AJOUTER UN LIEN</h4>
+            <h4>LIEN</h4>
 
             <input type="text" v-model="url" placeholder="Url du lien" autofocus>
             <input type="text" v-model="name" placeholder="Nom du lien">

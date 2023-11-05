@@ -15,11 +15,14 @@ export const modeStore = defineStore('mode', () => {
         mode.value = 'hobbie'
     }
     function toggleMenu() {
+        edit.value = false;
         menu.value = !menu.value;
     }
     function toggleMenuWidget() {
         menu_widget.value = !menu_widget.value;
     }
+
+
 
 
 

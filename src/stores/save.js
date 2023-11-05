@@ -15,8 +15,6 @@ export const saveStore = defineStore('save', () => {
 
 
 
-
-
     // FUNCTIONS
     function synchroniseLocalSave(object) {
         theme.value = object.theme ? object.theme : 'dark';

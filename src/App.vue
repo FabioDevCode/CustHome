@@ -187,13 +187,13 @@ onMounted(() => {
 		height: max-content;
 		width: 100%;
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 		grid-gap: 20px;
 		grid-template-rows: repeat(auto, 1fr);
 	}
 
 	#pro-link.without-widget .container-link {
-		grid-template-columns: repeat(6, 1fr);
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	}
 
 

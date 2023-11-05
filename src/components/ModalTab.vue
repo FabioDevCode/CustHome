@@ -20,7 +20,7 @@ function addNewTabWithResetInput() {
 <template>
     <div id="modal-tab" v-if="mode.addtab">
         <form @submit.prevent>
-            <h4>AJOUTER UN ONGLET</h4>
+            <h4>ONGLET</h4>
 
             <input v-model="new_tab" type="text" placeholder="Nom du nouvel onglet" autofocus>
 
