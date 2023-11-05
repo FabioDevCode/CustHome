@@ -6,7 +6,7 @@ import { toast } from 'vue3-toastify';
 export const saveStore = defineStore('save', () => {
     const theme = ref('dark');
 
-    const widget = ref(true);
+    const widget = ref(false);
     const widgetList = ref(['Horloge', 'Google']);
 
     const defaultTab = ref('Home');
@@ -20,7 +20,7 @@ export const saveStore = defineStore('save', () => {
     // FUNCTIONS
     function synchroniseLocalSave(object) {
         theme.value = object.theme ? object.theme : 'dark';
-        widget.value = object.widget ? object.widget : true;
+        widget.value = object.widget ? object.widget : false;
         widgetList.value = object.widgetList ? object.widgetList : ['Horloge', 'Google'];
         defaultTab.value = object.defaultTab ? object.defaultTab : 'Home';
         tabs.value = object.tabs ? object.tabs : ['Home'];
@@ -29,6 +29,16 @@ export const saveStore = defineStore('save', () => {
 
     function toggleWidget() {
         widget.value = !widget.value;
+        const localSave = JSON.parse(localStorage.getItem('CustHome'));
+        localSave.widget = widget.value;
+        localStorage.setItem('CustHome', JSON.stringify(localSave));
+    };
+
+    function toggleTheme() {
+        theme.value == 'dark' ? theme.value = 'light' : theme.value = 'dark';
+        const localSave = JSON.parse(localStorage.getItem('CustHome'));
+        localSave.theme = theme.value;
+        localStorage.setItem('CustHome', JSON.stringify(localSave));
     }
 
     function addNewTab(nameTab) {
@@ -45,20 +55,49 @@ export const saveStore = defineStore('save', () => {
             position: 'top-center',
             autoClose: 2000,
         });
-    }
+    };
 
     function chooseTab(tab) {
         defaultTab.value = tab;
+    };
+
+    function deleteTab(tab) {
+        tabs.value.splice(tabs.value.indexOf(tab), 1);
+        delete linkViews.value[tab];
+
+        const localSave = JSON.parse(localStorage.getItem('CustHome'));
+        localSave.tabs.splice(localSave.tabs.indexOf(tab), 1);
+        delete localSave.linkViews[tab];
+        localStorage.setItem('CustHome', JSON.stringify(localSave));
+
+        toast.success("Onglet supprimé avec succès.", {
+            theme: 'dark',
+            position: 'top-center',
+            autoClose: 2000,
+        });
     }
 
     function addNewLink(link) {
         linkViews.value[defaultTab.value].push(link);
-
         const localSave = JSON.parse(localStorage.getItem('CustHome'));
         localSave.linkViews[defaultTab.value].push(link);
         localStorage.setItem('CustHome', JSON.stringify(localSave));
-
         toast.success("Lien ajouté avec succès.", {
+            theme: 'dark',
+            position: 'top-center',
+            autoClose: 2000,
+        });
+    }
+
+    function deleteLink(link) {
+        const index = linkViews.value[defaultTab.value].indexOf(link)
+        linkViews.value[defaultTab.value].splice(index, 1);
+
+        const localSave = JSON.parse(localStorage.getItem('CustHome'));
+        localSave.linkViews[defaultTab.value].splice(index, 1);
+        localStorage.setItem('CustHome', JSON.stringify(localSave));
+
+        toast.success("Lien supprimé avec succès.", {
             theme: 'dark',
             position: 'top-center',
             autoClose: 2000,
@@ -67,35 +106,19 @@ export const saveStore = defineStore('save', () => {
 
 
 
-
-    // function toggleTheme() {
-    //     theme.value == 'dark' ? theme.value = 'light' : theme.value = 'dark';
-    //     console.log(theme.value);
-    // }
-    // function setDark() {
-    //     theme.value = 'dark';
-    // }
-    // function setLight() {
-    //     theme.value = 'light';
-    // }
-
-    // // link is an Object
-    // function addsaveLink(object) {
-    //     console.log(object)
-    //     // links.value.push(object);
-    //     // localStorage.setItem('CustHomeLinks', JSON.stringify(links.value));
-    // }
-
     return {
         synchroniseLocalSave,
         widget,
         toggleWidget,
         theme,
+        toggleTheme,
         tabs,
         defaultTab,
         addNewTab,
         chooseTab,
+        deleteTab,
         linkViews,
-        addNewLink
+        addNewLink,
+        deleteLink
     }
 });

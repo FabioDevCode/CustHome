@@ -1,10 +1,26 @@
 <script setup>
+import { onMounted, ref } from 'vue'
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 const mode = modeStore()
 const save = saveStore()
 
+let initialTheme = '';
+// let initialWidget = '';
 
+
+function switchTheme(id) {
+    const swithToggle = document.querySelector(`#${id}`);
+    swithToggle.classList.toggle('active');
+    save.toggleTheme();
+}
+
+
+onMounted(() => {
+    const localSave = JSON.parse(localStorage.getItem('CustHome'));
+    initialTheme = localSave?.theme ? localSave.theme : 'dark';
+    // initialWidget = localSave?.widget ? localSave.widget : false;
+})
 </script>
 
 
@@ -15,9 +31,52 @@ const save = saveStore()
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path d="M289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34z" fill="currentColor"></path></svg>
             </button>
 
-            <div class="menu-body">
+            <section class="menu-body">
 
-                <h4>Menu bientôt disponible</h4>
+                <h4>PARAMETRES PAR DEFAUT</h4>
+
+                <!-- <hr> -->
+
+                <div>
+                    <label v-if="initialTheme == 'dark'" id="theme" class="custom-checkbox active">
+                        <span class="label-text">Dark mode</span>
+                        <input type="checkbox" checked @click="switchTheme('theme')">
+                        <span class="check-body">
+                            <span class="check-toggle"></span>
+                        </span>
+                    </label>
+                    <label v-else id="theme" class="custom-checkbox ">
+                        <span class="label-text">Dark mode</span>
+                        <input type="checkbox" @click="switchTheme('theme')">
+                        <span class="check-body">
+                            <span class="check-toggle"></span>
+                        </span>
+                    </label>
+                </div>
+
+                <!-- <div>
+                    <label v-if="initialWidget == true" id="widget" class="custom-checkbox active">
+                        <span class="label-text">Widgets</span>
+                        <input type="checkbox" checked>
+                        <span class="check-body">
+                            <span class="check-toggle"></span>
+                        </span>
+                    </label>
+                    <label v-else id="widget" class="custom-checkbox ">
+                        <span class="label-text">Widgets</span>
+                        <input type="checkbox">
+                        <span class="check-body">
+                            <span class="check-toggle"></span>
+                        </span>
+                    </label>
+                </div> -->
+
+
+
+
+
+
+
 
                 <!-- <fieldset>
                     <legend>Thème</legend>
@@ -43,8 +102,6 @@ const save = saveStore()
                     </div>
                 </fieldset> -->
 
-                <hr>
-
                 <!-- <h4>Importer une saveuration</h4> -->
 
                 <!-- <div class="file-container">
@@ -67,7 +124,7 @@ const save = saveStore()
                 <!-- <button id="export-save">
                     Exporter ma saveuration
                 </button> -->
-            </div>
+            </section>
 
 
             <footer>
@@ -141,7 +198,6 @@ const save = saveStore()
         border-top: 1px dotted #444444;
     }
 
-
     /* LIGHT THEME */
     .light {
         background-color: rgba(207, 216, 220, .2);
@@ -161,9 +217,7 @@ const save = saveStore()
     .light .menu-bar .close-btn-menu:hover {
         background-color: #323232;
     }
-    .light .menu-bar .menu-body {
-        background-color: rgb(191, 205, 212);
-    }
+
     .light .menu-body h4 {
         color: black;
     }
@@ -204,6 +258,10 @@ const save = saveStore()
 		justify-content: flex-end;
 		top: 0;
     }
+
+
+
+
 
 	.menu-bar {
 		height: 100%;
@@ -251,52 +309,75 @@ const save = saveStore()
 		margin: 15px 0;
 	}
 
-	.menu-body fieldset {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-		padding: 10px 10px 15px 10px;
-		margin: 10px;
-		border-radius: 5px;
-	}
-
-	.menu-body fieldset div {
-        overflow: hidden;
-		display: flex;
-		align-items: center;
-		height: max-content;
-        width: 100%;
-        border-radius: 5px;
-        padding-left: 10px;
-		margin: 5px;
-	}
-
-	.menu-body fieldset legend {
-		padding: 0 5px;
-		font-weight: 600;
-	}
-
-	.menu-body fieldset div input[type=radio] {
-		cursor: pointer;
-		border: 0px;
-		height: 1.8em;
-		width: 1.8em;
-	}
-
-	.menu-body fieldset div label {
-        display: inline-block;
-        padding: 10px;
-        height: 100%;
-        width: 100%;
-		cursor: pointer;
-        color: black;
-        font-weight: 600;
-	}
-
     .menu-body h4 {
-        margin: 5px 10px 0px 10px;
+        margin: 5px 10px 20px 10px;
         font-weight: 600;
     }
+
+
+
+
+    .custom-checkbox {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #212a37;
+    }
+
+    .custom-checkbox input[type=checkbox] {
+        display: none;
+    }
+
+    .custom-checkbox .label-text {
+        display: inline-flex;
+        font-weight: bold;
+        margin-right: 20px;
+        font-family: sans-serif;
+        font-size: .9em;
+    }
+
+    .custom-checkbox .check-body {
+        border: solid 1px #171e28;
+        border-radius: 100px;
+        display: inline-flex;
+        justify-content: flex-start;
+        cursor: pointer;
+        width: 48px;
+        background-color: #ECEFF1;
+        box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .custom-checkbox .check-body .check-toggle {
+        border-radius: 50%;
+        border: solid 1px #171e28;
+        width: 24px;
+        height: 24px;
+        background-color: white;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+        box-sizing: border-box;
+        transition: transform 0.4s ease;
+    }
+
+    .custom-checkbox.active .check-body {
+        background-color: #1976D2;
+    }
+
+    .custom-checkbox.active .check-toggle {
+        transform: translateX(100%);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 	.file-container {
 		display: flex;
@@ -359,5 +440,4 @@ const save = saveStore()
         width: 80%;
         margin: 10px auto;
     }
-
 </style>

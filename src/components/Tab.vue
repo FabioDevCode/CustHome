@@ -8,12 +8,7 @@ const mode = modeStore();
 const save = saveStore();
 
 
-const new_tab = ref('');
 
-function addNewTabWithResetInput() {
-    save.addNewTab(new_tab.value);
-    new_tab.value = '';
-};
 </script>
 
 
@@ -22,7 +17,15 @@ function addNewTabWithResetInput() {
         <ul>
             <li :key="tab" v-for="tab in save.tabs">
                 <button v-if="tab == save.defaultTab" class="onglet active">{{ tab }}</button>
-                <button v-else class="onglet" @click="save.chooseTab(tab)">{{ tab }}</button>
+                <button v-else-if="!mode.edit" class="onglet" @click="save.chooseTab(tab)">{{ tab }}</button>
+                <button v-else class="onglet todel">
+                    {{ tab }}
+                    <span>
+                        <button class="btn-delete" @click="save.deleteTab(tab)">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"></path><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path></g></svg>
+                        </button>
+                    </span>
+                </button>
             </li>
 			<Transition>
                 <li v-if="mode.edit">
@@ -33,23 +36,6 @@ function addNewTabWithResetInput() {
             </Transition>
         </ul>
     </div>
-
-    <!-- MODAL -->
-    <Transition>
-        <div id="modal-tab" v-if="mode.addtab">
-            <form @submit.prevent>
-                <h4>AJOUTER UN ONGLET</h4>
-
-                <input v-model="new_tab" type="text" placeholder="Nom du nouvel onglet">
-                <button class="add" @click="addNewTabWithResetInput()">
-                    Ajouter l'onglet
-                </button>
-                <button class="back-edit" @click="mode.toggleAddTab()">
-                    Fermer
-                </button>
-            </form>
-        </div>
-    </Transition>
 </template>
 
 
@@ -70,11 +56,12 @@ function addNewTabWithResetInput() {
     }
 
     li {
+        position: relative;
         width: max-content;
         height: max-content;
     }
 
-    button {
+    button:not(.btn-delete) {
         cursor: pointer;
         font-weight: 400;
         height: 36px;
@@ -94,6 +81,48 @@ function addNewTabWithResetInput() {
         background-color: #1976D2;
     }
 
+    li button.todel:not(li span button.btn-delete ) {
+        pointer-events: none;
+        margin-right: 25px;
+    }
+
+
+    li span {
+        z-index: 1000;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, .3);
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    li span button.btn-delete {
+        pointer-events: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 24px !important;
+        width: 24px !important;
+        margin-right: 10px;
+        border-radius: 5px;
+        background-color: crimson;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+    li span button.btn-delete svg {
+        z-index: 1000;
+        color: black;
+        height: 80%;
+        width: auto;
+    }
+
+
 
     #add-onglet {
         height: 30px;
@@ -111,73 +140,5 @@ function addNewTabWithResetInput() {
         height: 100%;
         width: auto;
     }
-
-
-    /* MODAL */
-    #modal-tab {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        background-color: rgba(0, 0, 0, .5);
-    }
-
-    #modal-tab form {
-        border-radius: 10px;
-        padding: 10px;
-        height: max-content;
-        min-height: max-content;
-        width: 25vw;
-        min-width: 320px;
-        background-color: #1b2125;
-    }
-
-    #modal-tab form h4 {
-        font-size: 30px;
-        display: inline-block;
-        height: 40px;
-        width: 100%;
-        margin-bottom: 10px;
-        color: rgba(245, 245, 245, .2);
-    }
-
-    #modal-tab form input {
-        font-size: 1rem;
-        height: 40px;
-        width: 100%;
-        border-radius: 5px;
-        background-color: whitesmoke;
-        padding: 0 10px;
-        margin-bottom: 10px;
-
-    }
-
-    #modal-tab form button {
-        border-radius: 5px;
-    }
-
-    #modal-tab form button.add {
-        height: 40px;
-        width: 100%;
-        background-color: #00796B;
-        color: whitesmoke;
-        font-size: 1rem;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-
-    #modal-tab form button.back-edit {
-        height: 40px;
-        width: 100%;
-        background-color: #FF1744;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-
 
 </style>

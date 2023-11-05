@@ -13,6 +13,7 @@ import MenuWidget from '@/components/MenuWidget.vue';
 import Link from '@/components/Link.vue';
 import Tab from '@/components/Tab.vue';
 import ModalLink from '@/components/ModalLink.vue';
+import ModalTab from '@/components/ModalTab.vue';
 
 
 const mode = modeStore()
@@ -40,34 +41,47 @@ onMounted(() => {
 	<section :id="save.theme">
 		<main>
 			<Transition>
-				<div id="pro-widget" class="global" v-if="mode.mode === 'pro'">
+				<div v-if="save.widget" id="pro-widget" class="global">
 					<Horloge class="widget" />
 					<Google class="widget" />
 					<!-- <Npm class="widget" /> -->
-
 				</div>
 			</Transition>
-
 			<Transition>
-				<div id="pro-title" class="global" v-if="mode.mode === 'pro'">
+				<div v-if="save.widget" id="pro-title" class="global">
+					<div class="container-nav">
+						<Nav class="nav" />
+					</div>
+					<Tab />
+				</div>
+				<div v-else id="pro-title" class="global without-widget">
 					<div class="container-nav">
 						<Nav class="nav" />
 					</div>
 					<Tab />
 				</div>
 			</Transition>
-
 			<Transition>
-				<div id="pro-link" class="global" v-if="mode.mode === 'pro'">
+				<div v-if="save.widget" id="pro-link" class="global">
 					<div class="container-link">
 						<Link class="link" :url="link.url" :name="link.name" :key="link.name" v-for="link in save.linkViews[save.defaultTab]" />
-
+						<Transition>
+							<Link v-if="mode.edit" class="link edit" edit="edit" @click="mode.toggleAddLink()" />
+						</Transition>
+					</div>
+				</div>
+				<div v-else id="pro-link" class="global without-widget">
+					<div class="container-link">
+						<Link class="link" :url="link.url" :name="link.name" :key="link.name" v-for="link in save.linkViews[save.defaultTab]" />
 						<Transition>
 							<Link v-if="mode.edit" class="link edit" edit="edit" @click="mode.toggleAddLink()" />
 						</Transition>
 					</div>
 				</div>
 			</Transition>
+
+
+
 		</main>
 	</section>
 
@@ -81,6 +95,9 @@ onMounted(() => {
 	</Transition>
 	<Transition>
 		<ModalLink />
+	</Transition>
+	<Transition>
+		<ModalTab />
 	</Transition>
 </template>
 
@@ -161,6 +178,11 @@ onMounted(() => {
   		grid-row: 2 / 9;
 	}
 
+	#pro-link.without-widget {
+		grid-column: 1 / 13;
+  		grid-row: 2 / 9;
+	}
+
 	#pro-link .container-link {
 		height: max-content;
 		width: 100%;
@@ -170,6 +192,9 @@ onMounted(() => {
 		grid-template-rows: repeat(auto, 1fr);
 	}
 
+	#pro-link.without-widget .container-link {
+		grid-template-columns: repeat(6, 1fr);
+	}
 
 
 	#pro-title {
@@ -183,6 +208,13 @@ onMounted(() => {
 		grid-gap: 10px;
 		grid-template-rows: repeat(2, 1fr);
 	}
+
+	#pro-title.without-widget {
+		grid-column: 1 / 13;
+		grid-row: 1 / 2;
+	}
+
+
 
 
 	/* HOBBIE TEMPLATE */
