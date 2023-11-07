@@ -1,5 +1,4 @@
 <script setup>
-// import { toast } from 'vue3-toastify';
 import { ref } from 'vue';
 import { utilsStore } from '@/stores/utils';
 import npm_logo from '@/assets/img/npm_logo.png';

@@ -6,11 +6,18 @@ const mode = modeStore()
 const save = saveStore()
 
 
-function switchTheme(id) {
-    const swithToggle = document.querySelector(`#${id}`);
+function switchTheme() {
+    const swithToggle = document.querySelector('#theme');
     swithToggle.classList.toggle('active');
     save.toggleTheme();
 }
+function switchWidget() {
+    const switchWidget = document.querySelector('#widget');
+    switchWidget.classList.toggle('active');
+    save.toggleWidget();
+}
+
+
 </script>
 
 
@@ -30,29 +37,22 @@ function switchTheme(id) {
                 <div>
                     <label id="theme" class="custom-checkbox" :class="{active: save.theme == 'dark'}">
                         <span class="label-text">Thème sombre</span>
-                        <input type="checkbox" checked @click="switchTheme('theme')">
+                        <input type="checkbox" @click="switchTheme()">
                         <span class="check-body">
                             <span class="check-toggle"></span>
                         </span>
                     </label>
                 </div>
 
-                <!-- <div>
-                    <label v-if="initialWidget == true" id="widget" class="custom-checkbox active">
+                <div>
+                    <label id="widget" class="custom-checkbox" :class="{active: save.widget}">
                         <span class="label-text">Widgets</span>
-                        <input type="checkbox" checked>
+                        <input type="checkbox" @click="switchWidget()">
                         <span class="check-body">
                             <span class="check-toggle"></span>
                         </span>
                     </label>
-                    <label v-else id="widget" class="custom-checkbox ">
-                        <span class="label-text">Widgets</span>
-                        <input type="checkbox">
-                        <span class="check-body">
-                            <span class="check-toggle"></span>
-                        </span>
-                    </label>
-                </div> -->
+                </div>
 
 
 

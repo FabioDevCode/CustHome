@@ -50,7 +50,7 @@ export const saveStore = defineStore('save', () => {
 
         toast.success("Onglet ajouté avec succès.", {
             theme: 'dark',
-            position: 'top-center',
+            position: 'bottom-left',
             autoClose: 2000,
         });
     };
@@ -74,7 +74,7 @@ export const saveStore = defineStore('save', () => {
 
         toast.success("Onglet supprimé avec succès.", {
             theme: 'dark',
-            position: 'top-center',
+            position: 'bottom-left',
             autoClose: 2000,
         });
     }
@@ -86,7 +86,7 @@ export const saveStore = defineStore('save', () => {
         localStorage.setItem('CustHome', JSON.stringify(localSave));
         toast.success("Lien ajouté avec succès.", {
             theme: 'dark',
-            position: 'top-center',
+            position: 'bottom-left',
             autoClose: 2000,
         });
     }
@@ -101,7 +101,7 @@ export const saveStore = defineStore('save', () => {
 
         toast.success("Lien supprimé avec succès.", {
             theme: 'dark',
-            position: 'top-center',
+            position: 'bottom-left',
             autoClose: 2000,
         });
     }

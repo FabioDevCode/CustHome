@@ -1,5 +1,4 @@
 <script setup>
-// import { toast } from 'vue3-toastify';
 import { ref } from 'vue';
 import { utilsStore } from '@/stores/utils';
 import google_logo from '@/assets/img/google_logo.png';

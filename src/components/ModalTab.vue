@@ -16,7 +16,7 @@ function addNewTabWithResetInput() {
     if(!new_tab.value.length) {
         return toast.error("Le champs est vide.", {
             theme: 'dark',
-            position: 'top-center',
+            position: 'bottom-left',
             autoClose: 2000,
         });
     }

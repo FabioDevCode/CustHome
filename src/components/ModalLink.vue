@@ -16,7 +16,7 @@ function saveNewLink() {
     if(!name.value.length || !url.value.length) {
         return toast.error("Un champ est vide.", {
             theme: 'dark',
-            position: 'top-center',
+            position: 'bottom-left',
             autoClose: 2000,
         });
     }
