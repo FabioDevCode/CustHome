@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { toast } from 'vue3-toastify';
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 const mode = modeStore()
@@ -18,6 +18,60 @@ function switchWidget() {
 }
 
 
+// EXPORT CONFIG
+function exportConfig() {
+    const dataStr = 'data:application/json;charset=utf-8,' + encodeURIComponent(localStorage.getItem('CustHome'));
+    const downloadLink = document.querySelector('#downloadConfig');
+    downloadLink.setAttribute('href', dataStr);
+    downloadLink.setAttribute('download', 'CustHome.json');
+    downloadLink.click();
+};
+
+function dropHandler(e) {
+    e.preventDefault();
+    if(e.dataTransfer.items) {
+        [...e.dataTransfer.items].forEach((item, i) => {
+            if (item.kind === "file") {
+                const file = item.getAsFile();
+                const reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = function() {
+                    save.importConfig(JSON.parse(reader.result));
+                }
+                reader.onerror = function() {
+                    console.log(reader.error);
+                    toast.error("Une erreur s'est produite, veuillez réessayer plutard.", {
+                        theme: 'dark',
+                        position: 'bottom-left',
+                        autoClose: 5000,
+                    });
+                }
+            }
+        })
+    }
+};
+
+function dragOverHandler(e) {
+    e.preventDefault();
+};
+
+// IMPORT CONFIG
+function importConfig(e) {
+    const file = e.target.files[0] || e.dataTransfer.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function() {
+        save.importConfig(JSON.parse(reader.result));
+    }
+    reader.onerror = function() {
+        console.log(reader.error);
+        toast.error("Une erreur s'est produite, veuillez réessayer plutard.", {
+            theme: 'dark',
+            position: 'bottom-left',
+            autoClose: 5000,
+        });
+    }
+}
 </script>
 
 
@@ -29,10 +83,7 @@ function switchWidget() {
             </button>
 
             <section class="menu-body">
-
-                <h4>PARAMETRES PAR DEFAUT</h4>
-
-                <!-- <hr> -->
+                <h3>PARAMETRES PAR DEFAUT</h3>
 
                 <div>
                     <label id="theme" class="custom-checkbox" :class="{active: save.theme == 'dark'}">
@@ -55,39 +106,7 @@ function switchWidget() {
                 </div>
 
 
-
-
-
-
-
-
-                <!-- <fieldset>
-                    <legend>Thème</legend>
-                    <div @click="save.setDark()">
-                        <input type="radio" id="dark-mono" name="theme" value="dark" checked />
-                        <label for="dark-mono">Dark</label>
-                    </div>
-                    <div @click="save.setLight()">
-                        <input type="radio" id="light-mono" name="theme" value="light" />
-                        <label for="light-mono">Light</label>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Page par défaut</legend>
-                    <div @click="mode.setPro()">
-                        <input type="radio" id="pro" name="default-mode" value="pro" checked />
-                        <label for="pro">Pro</label>
-                    </div>
-                    <div @click="mode.setHobbie()">
-                        <input type="radio" id="hobbie" name="default-mode" value="hobbie" />
-                        <label for="hobbie">Hobbie</label>
-                    </div>
-                </fieldset> -->
-
-                <!-- <h4>Importer une saveuration</h4> -->
-
-                <!-- <div class="file-container">
+                <div class="file-container" @drop="dropHandler" @dragover="dragOverHandler">
                     <label for="dropzone-file">
                         <div>
                             <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -96,17 +115,17 @@ function switchWidget() {
                             <p class="first">
                                 <span>Click to upload</span> or drag and drop
                             </p>
-                            <p class="second">JSON (CustHome_save.json)</p>
+                            <p class="second">JSON (CustHome.json)</p>
                         </div>
-                        <input id="dropzone-file" type="file" accept="application/json" hidden />
+                        <input @change="importConfig" id="dropzone-file" type="file" accept="application/json" hidden />
                     </label>
-                </div> -->
+                </div>
 
-                <!-- <hr> -->
 
-                <!-- <button id="export-save">
-                    Exporter ma saveuration
-                </button> -->
+                <button id="export-save" @click="exportConfig()">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16"><g fill="none"><path d="M3.5 13h9a.75.75 0 0 1 .102 1.493l-.102.007h-9a.75.75 0 0 1-.102-1.493L3.5 13h9h-9zM7.898 1.007L8 1a.75.75 0 0 1 .743.648l.007.102v7.688l2.255-2.254a.75.75 0 0 1 .977-.072l.084.072a.75.75 0 0 1 .072.977l-.072.084L8.53 11.78a.75.75 0 0 1-.976.073l-.084-.073l-3.536-3.535a.75.75 0 0 1 .977-1.133l.084.072L7.25 9.44V1.75a.75.75 0 0 1 .648-.743L8 1l-.102.007z" fill="currentColor"></path></g></svg>
+                    <p>Exporter ma configuration</p>
+                </button>
             </section>
 
 
@@ -124,6 +143,7 @@ function switchWidget() {
                 </svg>
             </footer>
         </div>
+        <a id="downloadConfig"></a>
     </div>
 </template>
 
@@ -151,20 +171,10 @@ function switchWidget() {
         /* background-color: #263238;
         background-color: rgba(38, 50, 56, .3); */
     }
-    .dark .menu-body h4 {
+    .dark .menu-body h3 {
         color: whitesmoke;
     }
-    .dark .menu-body fieldset {
-        border: 1px solid #1976D2;
-        color: whitesmoke;
 
-    }
-    .dark .menu-body fieldset div {
-        background-color: #1976D2;
-    }
-    .dark .menu-body fieldset div label {
-        color: black;
-    }
     .dark .menu-body .file-container label {
         background-color: #171e28;
 		border: 1px dashed #0D47A1;
@@ -177,9 +187,8 @@ function switchWidget() {
     .dark .menu-body button:hover {
         background-color: #42A5F5;
     }
-    .dark .menu-body hr {
-        border-top: 1px dotted #444444;
-    }
+
+
 
     /* LIGHT THEME */
     .light {
@@ -201,19 +210,10 @@ function switchWidget() {
         background-color: #323232;
     }
 
-    .light .menu-body h4 {
+    .light .menu-body h3 {
         color: black;
     }
-    .light .menu-body fieldset {
-        border: 1px solid #0D47A1;
-        color: #212121;
-    }
-    .light .menu-body fieldset div {
-        background-color: #0D47A1;
-    }
-    .light .menu-body fieldset div label {
-        color: whitesmoke;
-    }
+
     .light .menu-body .file-container label {
         background-color: #CFD8DC;
 		border: 1px dashed #90A4AE;
@@ -241,10 +241,6 @@ function switchWidget() {
 		justify-content: flex-end;
 		top: 0;
     }
-
-
-
-
 
 	.menu-bar {
 		height: 100%;
@@ -292,13 +288,12 @@ function switchWidget() {
 		margin: 15px 0;
 	}
 
-    .menu-body h4 {
-        margin: 5px 10px 20px 10px;
+    .menu-body h3 {
+        margin-top: 10px;
+        padding: 0 0 20px 10px;
         font-weight: 600;
+        border-bottom: 1px solid #212a37;
     }
-
-
-
 
     .custom-checkbox {
         display: flex;
@@ -314,7 +309,7 @@ function switchWidget() {
 
     .custom-checkbox .label-text {
         display: inline-flex;
-        font-weight: bold;
+        font-weight: 400;
         margin-right: 20px;
         font-family: sans-serif;
         font-size: .9em;
@@ -351,23 +346,13 @@ function switchWidget() {
         transform: translateX(100%);
     }
 
-
-
-
-
-
-
-
-
-
-
-
 	.file-container {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
 		padding: 10px;
+        margin-top: 40px;
 	}
 
 	.file-container label {
@@ -410,17 +395,28 @@ function switchWidget() {
 		font-weight: 400;
 		height: 50px;
 		width: auto;
-		margin: 10px;
+		margin: 40px 10px 0px 10px;
 		border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 	}
+
+    #export-save svg {
+        height: 45%;
+        margin-right: 15px;
+    }
 
 	#export-save:active {
 		transform: scale(.99);
 	}
 
-    hr {
-        border: none;
-        width: 80%;
-        margin: 10px auto;
+    footer {
+        margin-top: 40px;
+    }
+
+
+    #downloadConfig {
+        display: none;
     }
 </style>

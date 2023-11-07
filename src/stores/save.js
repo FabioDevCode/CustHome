@@ -6,7 +6,7 @@ import { toast } from 'vue3-toastify';
 export const saveStore = defineStore('save', () => {
     const theme = ref('dark');
 
-    const widget = ref(false);
+    const widget = ref(true);
     const widgetList = ref(['Horloge', 'Google']);
 
     const defaultTab = ref('Home');
@@ -18,12 +18,22 @@ export const saveStore = defineStore('save', () => {
     // FUNCTIONS
     function synchroniseLocalSave(object) {
         theme.value = object.theme ? object.theme : 'dark';
-        widget.value = object.widget ? object.widget : false;
+        widget.value = object.widget ? object.widget : true;
         widgetList.value = object.widgetList ? object.widgetList : ['Horloge', 'Google'];
         defaultTab.value = object.defaultTab ? object.defaultTab : 'Home';
         tabs.value = object.tabs ? object.tabs : ['Home'];
         linkViews.value = object.linkViews ? object.linkViews : {Home: []};
     };
+
+    function importConfig(object) {
+        synchroniseLocalSave(object);
+        localStorage.setItem('CustHome', JSON.stringify(object));
+        toast.success("Configuration importée avec succès.", {
+            theme: 'dark',
+            position: 'bottom-left',
+            autoClose: 3000,
+        });
+    }
 
     function toggleWidget() {
         widget.value = !widget.value;
@@ -51,7 +61,7 @@ export const saveStore = defineStore('save', () => {
         toast.success("Onglet ajouté avec succès.", {
             theme: 'dark',
             position: 'bottom-left',
-            autoClose: 2000,
+            autoClose: 3000,
         });
     };
 
@@ -75,7 +85,7 @@ export const saveStore = defineStore('save', () => {
         toast.success("Onglet supprimé avec succès.", {
             theme: 'dark',
             position: 'bottom-left',
-            autoClose: 2000,
+            autoClose: 3000,
         });
     }
 
@@ -87,7 +97,7 @@ export const saveStore = defineStore('save', () => {
         toast.success("Lien ajouté avec succès.", {
             theme: 'dark',
             position: 'bottom-left',
-            autoClose: 2000,
+            autoClose: 3000,
         });
     }
 
@@ -102,7 +112,7 @@ export const saveStore = defineStore('save', () => {
         toast.success("Lien supprimé avec succès.", {
             theme: 'dark',
             position: 'bottom-left',
-            autoClose: 2000,
+            autoClose: 3000,
         });
     }
 
@@ -110,6 +120,7 @@ export const saveStore = defineStore('save', () => {
 
     return {
         synchroniseLocalSave,
+        importConfig,
         widget,
         toggleWidget,
         theme,
