@@ -1,12 +1,9 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 const mode = modeStore()
 const save = saveStore()
-
-let initialTheme = '';
-// let initialWidget = '';
 
 
 function switchTheme(id) {
@@ -14,13 +11,6 @@ function switchTheme(id) {
     swithToggle.classList.toggle('active');
     save.toggleTheme();
 }
-
-
-onMounted(() => {
-    const localSave = JSON.parse(localStorage.getItem('CustHome'));
-    initialTheme = localSave?.theme ? localSave.theme : 'dark';
-    // initialWidget = localSave?.widget ? localSave.widget : false;
-})
 </script>
 
 
@@ -38,16 +28,9 @@ onMounted(() => {
                 <!-- <hr> -->
 
                 <div>
-                    <label v-if="initialTheme == 'dark'" id="theme" class="custom-checkbox active">
-                        <span class="label-text">Dark mode</span>
+                    <label id="theme" class="custom-checkbox" :class="{active: save.theme == 'dark'}">
+                        <span class="label-text">Thème sombre</span>
                         <input type="checkbox" checked @click="switchTheme('theme')">
-                        <span class="check-body">
-                            <span class="check-toggle"></span>
-                        </span>
-                    </label>
-                    <label v-else id="theme" class="custom-checkbox ">
-                        <span class="label-text">Dark mode</span>
-                        <input type="checkbox" @click="switchTheme('theme')">
                         <span class="check-body">
                             <span class="check-toggle"></span>
                         </span>
