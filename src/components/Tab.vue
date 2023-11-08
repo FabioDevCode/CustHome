@@ -1,19 +1,15 @@
 <script setup>
-import { ref } from 'vue';
-// STORES
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 
 const mode = modeStore();
 const save = saveStore();
 
-
-
 </script>
 
 
 <template>
-    <div id="tab-container">
+    <div id="tab-container" :class="save.theme">
         <ul>
             <li :key="tab" v-for="tab in save.tabs">
                 <button v-if="tab == save.defaultTab" class="onglet active">{{ tab }}</button>
@@ -29,7 +25,7 @@ const save = saveStore();
             </li>
 			<Transition>
                 <li v-if="mode.edit">
-                    <button id="add-onglet" @click="mode.toggleAddTab()">
+                    <button id="add-onglet" class="add-onglet" @click="mode.toggleAddTab()">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M400 256H112"></path></svg>
                     </button>
                 </li>
@@ -40,6 +36,10 @@ const save = saveStore();
 
 
 <style scoped>
+    @import '../assets/css/TabDark.css';
+    @import '../assets/css/TabLight.css';
+
+
     #tab-container {
         height: 100%;
         min-height: 30px;
@@ -70,22 +70,14 @@ const save = saveStore();
         margin-right: 10px;
     }
 
-    .onglet {
-        color: #4a5b78;
-        background-color: #252d3a;
-    }
-
     .active {
         pointer-events: none;
-        color: #171e28;
-        background-color: #1976D2;
     }
 
     li button.todel:not(li span button.btn-delete ) {
         pointer-events: none;
         margin-right: 25px;
     }
-
 
     li span {
         z-index: 1000;
@@ -96,7 +88,6 @@ const save = saveStore();
         bottom: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba(0, 0, 0, .3);
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -111,29 +102,19 @@ const save = saveStore();
         width: 24px !important;
         margin-right: 10px;
         border-radius: 5px;
-        background-color: crimson;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
 
     li span button.btn-delete svg {
         z-index: 1000;
-        color: black;
         height: 80%;
         width: auto;
     }
-
-
 
     #add-onglet {
         height: 30px;
         width: 30px;
         padding: 5px;
-        /* background-color: #171e28;
-        color: #1976D2;
-        border: 1px dashed #1976D2; */
-        background-color: #172819;
-        color: #00796B;
-        border: 1px dashed #00796B;
     }
 
     #add-onglet svg {

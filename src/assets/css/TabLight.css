@@ -1,0 +1,27 @@
+#tab-container.light ul li .onglet {
+    color: #B9C4C9;
+    background-color: #78909C;
+}
+
+#tab-container.light ul li .onglet.active {
+    color: whitesmoke;
+    background-color: #0D47A1;
+}
+
+#tab-container.light ul li span {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+#tab-container.light ul li span button.btn-delete {
+    background-color: rgb(255, 0, 0);
+}
+
+#tab-container.light ul li span button.btn-delete svg {
+    color: whitesmoke;
+}
+
+#tab-container.light ul li button.add-onglet {
+    background-color: #9dd49f;
+    color: #00796B;
+    border: 1px dashed #00796B;
+}

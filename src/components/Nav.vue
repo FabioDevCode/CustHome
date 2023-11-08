@@ -1,14 +1,10 @@
 <script setup>
-import { ref } from 'vue'
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 import LogoCustHome from '@/components/LogoCustHome.vue';
 
-
 const mode = modeStore()
 const save = saveStore()
-
-
 
 </script>
 
@@ -41,26 +37,9 @@ const save = saveStore()
 
 
 <style scoped>
-    /* DARK THEME */
-    .dark ul li button {
-        background-color: #CFD8DC;
-    }
-    .dark ul li button:hover {
-        background-color: #ECEFF1;
-    }
+    @import '@/assets/css/NavDark.css';
+    @import '@/assets/css/NavLight.css';
 
-
-    /* LIGHT THEME */
-    .light ul li button {
-        background-color: #212121;
-        color: whitesmoke;
-    }
-    .light ul li button:hover {
-        background-color: #323232;
-    }
-
-
-    /* OTHERS CSS PROPERTIES */
     nav {
         overflow: hidden;
         width: 100%;
@@ -68,10 +47,6 @@ const save = saveStore()
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-
-    nav .nav-logo {
-        color: #202834;
     }
 
     nav ul {
@@ -106,7 +81,5 @@ const save = saveStore()
     nav ul li button svg {
         height: 22px;
         width: 22px;
-
     }
-
 </style>

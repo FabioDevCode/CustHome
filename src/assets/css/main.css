@@ -7,9 +7,6 @@
 	--main-color-hov: #42A5F5; /* blue-lighten-1 */
 
 	--light-bg: #ECEFF1;
-
-
-
 }
 
 * {
@@ -46,7 +43,6 @@ body {
 	font-weight: 400;
 	transition: background-color 200ms ease-in-out;
 	background-color: #222222;
-	color: whitesmoke;
 	font-size: calc(14px + 0.1vw);
 }
 

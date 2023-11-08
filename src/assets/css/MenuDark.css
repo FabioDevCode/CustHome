@@ -1,0 +1,47 @@
+.dark {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.dark .menu-bar {
+    background-color: #1b2125;
+}
+
+.dark .menu-bar footer {
+    color: #37474F;
+}
+
+.dark .menu-bar .close-btn-menu {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #CFD8DC;
+}
+
+.dark .menu-bar .close-btn-menu:hover {
+    background-color: #ECEFF1;
+}
+
+.dark .menu-body h3 {
+    color: whitesmoke;
+}
+
+.dark .menu-body div label {
+    color: whitesmoke;
+}
+
+.dark .menu-body div .custom-checkbox.active .check-body {
+    background-color: #1976D2;
+}
+
+.dark .menu-body .file-container label {
+    background-color: #171e28;
+    border: 1px dashed #0D47A1;
+    color: #0D47A1;
+}
+
+.dark .menu-body button {
+    background-color: #1976D2;
+    color: black;
+}
+
+.dark .menu-body button:hover {
+    background-color: #42A5F5;
+}

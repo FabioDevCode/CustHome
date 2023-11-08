@@ -1,0 +1,12 @@
+.dark ul li button {
+    background-color: #CFD8DC;
+    color: black;
+}
+
+.dark ul li button:hover {
+    background-color: #ECEFF1;
+}
+
+.dark .nav-logo {
+    color: #202834;
+}

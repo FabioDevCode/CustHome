@@ -1,0 +1,21 @@
+#modal-link.light, #modal-tab.light {
+    background-color: rgba(250, 250, 250, .5);
+}
+
+#modal-link.light form, #modal-tab.light form {
+    background-color: #B0BEC5;
+}
+
+#modal-link.light form h4, #modal-tab.light form h4 {
+    color: #78909C;
+}
+
+#modal-link.light form button.add, #modal-tab.light form button.add {
+    background-color: #00796B;
+    color: whitesmoke;
+}
+
+#modal-link.light form button.back-edit, #modal-tab.light form button.back-edit {
+    background-color: #FF1744;
+    color: whitesmoke;
+}

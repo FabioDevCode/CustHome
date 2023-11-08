@@ -1,0 +1,8 @@
+#horloge.dark {
+    background-color: rgba(25, 118, 210, .3);
+}
+
+#horloge.dark p, #horloge.dark span {
+    color: whitesmoke;
+}
+

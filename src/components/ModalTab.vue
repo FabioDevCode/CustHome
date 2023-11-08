@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
 
-// STORES
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 
@@ -28,7 +27,7 @@ function addNewTabWithResetInput() {
 
 
 <template>
-    <div id="modal-tab" v-if="mode.addtab">
+    <div id="modal-tab" v-if="mode.addtab" :class="save.theme">
         <form @submit.prevent>
             <h4>ONGLET</h4>
 
@@ -47,6 +46,8 @@ function addNewTabWithResetInput() {
 
 
 <style scoped>
+    @import '../assets/css/ModalDark.css';
+    @import '../assets/css/ModalLight.css';
 
     /* MODAL */
     #modal-tab {
@@ -58,7 +59,6 @@ function addNewTabWithResetInput() {
         top: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba(0, 0, 0, .5);
     }
 
     #modal-tab form {
@@ -68,7 +68,6 @@ function addNewTabWithResetInput() {
         min-height: max-content;
         width: 25vw;
         min-width: 320px;
-        background-color: #1b2125;
     }
 
     #modal-tab form h4 {
@@ -77,7 +76,6 @@ function addNewTabWithResetInput() {
         height: 40px;
         width: 100%;
         margin-bottom: 10px;
-        color: rgba(245, 245, 245, .2);
     }
 
     #modal-tab form input {
@@ -98,8 +96,6 @@ function addNewTabWithResetInput() {
     #modal-tab form button.add {
         height: 40px;
         width: 100%;
-        background-color: #00796B;
-        color: whitesmoke;
         font-size: 1rem;
         font-weight: 600;
         margin-bottom: 10px;
@@ -108,7 +104,6 @@ function addNewTabWithResetInput() {
     #modal-tab form button.back-edit {
         height: 40px;
         width: 100%;
-        background-color: #FF1744;
         font-size: 1rem;
         font-weight: 600;
     }

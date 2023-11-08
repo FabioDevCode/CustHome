@@ -1,5 +1,4 @@
 <script setup>
-// STORES
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 
@@ -10,7 +9,6 @@ const save = saveStore();
 function deleteThisLink(url, name) {
     save.deleteLink({url, name});
 }
-
 
 const props = defineProps({
     edit: '',
@@ -23,12 +21,12 @@ const props = defineProps({
 
 
 <template>
-    <a v-if="!mode.edit" :href="props.url" target="_blank" :id="edit">
+    <a v-if="!mode.edit" :href="props.url" target="_blank" :id="edit" :class="save.theme">
         <p v-if="props.name">{{ props.name }}</p>
         <svg v-if="!props.name && props.edit === 'edit'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M400 256H112"></path></svg>
     </a>
 
-    <a v-else target="_blank" :id="edit">
+    <a v-else target="_blank" :id="edit" :class="save.theme">
         <p v-if="props.name">{{ props.name }}</p>
         <svg v-if="!props.name && props.edit === 'edit'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M400 256H112"></path></svg>
         <span v-if="mode.edit && edit != 'edit'">
@@ -41,6 +39,9 @@ const props = defineProps({
 
 
 <style scoped>
+    @import '@/assets/css/LinkDark.css';
+    @import '@/assets/css/LinkLight.css';
+
     a {
         position: relative;
         display: flex;
@@ -51,7 +52,6 @@ const props = defineProps({
         width: 100%;
         min-width: 250px;
         padding: 5px 20px;
-        background-color: #CFD8DC;
         border-radius: 5px;
     }
 
@@ -62,7 +62,6 @@ const props = defineProps({
         left: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba(0, 0, 0, .3);
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -77,7 +76,6 @@ const props = defineProps({
         width: 32px;
         margin-right: -10px;
         border-radius: 5px;
-        background-color: crimson;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
     a span button svg {
@@ -89,9 +87,6 @@ const props = defineProps({
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #172819;
-        color: #00796B;
-        border: 1px dashed #00796B;
     }
 
     #edit svg {

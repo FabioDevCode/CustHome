@@ -1,10 +1,13 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { saveStore } from '@/stores/save';
+
+const save = saveStore();
+
 
 const hours = ref('00');
 const mins = ref('00');
 const secs = ref('00');
-
 
 function updateTime() {
     const today = new Date();
@@ -26,7 +29,7 @@ onMounted(() => {
 
 
 <template>
-    <div id="horloge">
+    <div id="horloge" :class="save.theme">
         <p class="hours">
             {{ hours }}
         </p>
@@ -43,6 +46,9 @@ onMounted(() => {
 
 
 <style scoped>
+    @import '@/assets/css/widget/HorlogeDark.css';
+    @import '@/assets/css/widget/HorlogeLight.css';
+
     #horloge {
         overflow: hidden;
         font-family: 'Chakra Petch', sans-serif;
@@ -55,8 +61,7 @@ onMounted(() => {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgba(25, 118, 210, .3);
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
     #horloge span {
@@ -75,7 +80,6 @@ onMounted(() => {
     }
     .mins {
         justify-content: center;
-
     }
     .secs {
         justify-content: start;

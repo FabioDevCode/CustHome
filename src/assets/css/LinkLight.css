@@ -1,0 +1,22 @@
+a.light {
+    background-color: rgb(23, 23, 27);
+    color: whitesmoke;
+}
+
+a.light span {
+    background-color: rgba(167, 181, 241, 0.3);
+}
+
+a.light span button {
+    background-color: rgb(255, 0, 0);
+}
+
+a.light span button svg {
+    color: whitesmoke;
+}
+
+#edit.light {
+    background-color: #9dd49f;
+    color: #00796B;
+    border: 1px dashed #00796B;
+}

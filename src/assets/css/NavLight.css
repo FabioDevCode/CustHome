@@ -1,0 +1,12 @@
+.light ul li button {
+    background-color: #212121;
+    color: whitesmoke;
+}
+
+.light ul li button:hover {
+    background-color: #323232;
+}
+
+.light .nav-logo {
+    color: #B0BEC5;
+}

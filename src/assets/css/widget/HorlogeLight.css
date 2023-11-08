@@ -1,0 +1,7 @@
+#horloge.light {
+    background-color: rgba(13, 71, 161, .5);
+}
+
+#horloge.light p, #horloge.light span {
+    color: black;
+}

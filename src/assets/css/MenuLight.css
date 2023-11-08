@@ -1,0 +1,53 @@
+.light {
+    background-color: rgba(207, 216, 220, .2);
+}
+
+.light .menu-bar {
+    background-color: #B0BEC5;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.light .menu-bar footer {
+    color: #78909C;
+}
+
+.light .menu-bar .close-btn-menu {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #212121;
+    color: whitesmoke;
+}
+
+.light .menu-bar .close-btn-menu:hover {
+    background-color: #323232;
+}
+
+.light .menu-body h3 {
+    color: black;
+}
+
+.light .menu-body div label {
+    color: black;
+}
+
+.light .menu-body div .custom-checkbox.active .check-body {
+    background-color: #0D47A1;
+}
+
+.light .menu-body .file-container label {
+    background-color: #b0ccd8;
+    border: 1px dashed #0D47A1;
+    color: #0D47A1;
+}
+
+.light .menu-body button {
+    background-color: #0D47A1;
+    color: whitesmoke;
+}
+
+.light .menu-body button:hover {
+    background-color: #1565C0;
+}
+
+.light .menu-body hr {
+    border-top: 1px dotted #90A4AE;
+}

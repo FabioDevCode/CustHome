@@ -1,0 +1,21 @@
+#modal-link.dark, #modal-tab.dark {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+#modal-link.dark form, #modal-tab.dark form  {
+    background-color: #1b2125;
+}
+
+#modal-link.dark form h4, #modal-tab.dark form h4 {
+    color: rgba(245, 245, 245, .2);
+}
+
+#modal-link.dark form button.add, #modal-tab.dark form button.add {
+    background-color: #00796B;
+    color: whitesmoke;
+}
+
+#modal-link.dark form button.back-edit, #modal-tab.dark form button.back-edit {
+    background-color: #FF1744;
+}
+

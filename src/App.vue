@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 // Widgets
@@ -113,9 +113,7 @@ onMounted(() => {
 	}
 	#dark main .global {
 		background-color: var(--dark-bg);
-        /* background-color: #171e28; */
 	}
-
 
 	/* LIGHT THEME */
 	#light {
@@ -213,8 +211,6 @@ onMounted(() => {
 		grid-column: 1 / 13;
 		grid-row: 1 / 2;
 	}
-
-
 
 
 	/* HOBBIE TEMPLATE */

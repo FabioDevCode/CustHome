@@ -112,6 +112,7 @@ function importConfig(e) {
                             <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                             </svg>
+                            <b>Importer une configuration</b>
                             <p class="first">
                                 <span>Click to upload</span> or drag and drop
                             </p>
@@ -150,86 +151,8 @@ function importConfig(e) {
 
 
 <style scoped>
-    /* DARK THEME */
-    .dark {
-        background-color: rgba(0, 0, 0, .2);
-    }
-    .dark .menu-bar {
-		background-color: #1b2125;
-    }
-    .dark .menu-bar footer {
-        color: #37474F;
-    }
-    .dark .menu-bar .close-btn-menu {
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        background-color: #CFD8DC;
-    }
-    .dark .menu-bar .close-btn-menu:hover {
-        background-color: #ECEFF1;
-    }
-    .dark .menu-bar .menu-body {
-        /* background-color: #263238;
-        background-color: rgba(38, 50, 56, .3); */
-    }
-    .dark .menu-body h3 {
-        color: whitesmoke;
-    }
-
-    .dark .menu-body .file-container label {
-        background-color: #171e28;
-		border: 1px dashed #0D47A1;
-        color: #0D47A1;
-    }
-    .dark .menu-body button {
-        background-color: #1976D2;
-        color: black;
-    }
-    .dark .menu-body button:hover {
-        background-color: #42A5F5;
-    }
-
-
-
-    /* LIGHT THEME */
-    .light {
-        background-color: rgba(207, 216, 220, .2);
-    }
-    .light .menu-bar {
-        background-color: #B0BEC5;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    }
-    .light .menu-bar footer {
-        color: #78909C;
-    }
-    .light .menu-bar .close-btn-menu {
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        background-color: #212121;
-        color: whitesmoke;
-    }
-    .light .menu-bar .close-btn-menu:hover {
-        background-color: #323232;
-    }
-
-    .light .menu-body h3 {
-        color: black;
-    }
-
-    .light .menu-body .file-container label {
-        background-color: #CFD8DC;
-		border: 1px dashed #90A4AE;
-        color: #90A4AE;
-    }
-    .light .menu-body button {
-        background-color: #0D47A1;
-        color: whitesmoke;
-    }
-    .light .menu-body button:hover {
-        background-color: #1565C0;
-    }
-    .light .menu-body hr {
-        border-top: 1px dotted #90A4AE;
-    }
-
+    @import "@/assets/css/MenuDark.css";
+    @import "@/assets/css/MenuLight.css";
 
     /* OTHERS CSS PROPERTIES */
     #overlay-menu {
@@ -338,10 +261,6 @@ function importConfig(e) {
         transition: transform 0.4s ease;
     }
 
-    .custom-checkbox.active .check-body {
-        background-color: #1976D2;
-    }
-
     .custom-checkbox.active .check-toggle {
         transform: translateX(100%);
     }
@@ -414,7 +333,6 @@ function importConfig(e) {
     footer {
         margin-top: 40px;
     }
-
 
     #downloadConfig {
         display: none;

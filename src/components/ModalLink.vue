@@ -34,7 +34,7 @@ function saveNewLink() {
 
 
 <template>
-    <div id="modal-link" v-if="mode.addLink">
+    <div id="modal-link" v-if="mode.addLink" :class="save.theme">
         <form @submit.prevent>
             <h4>LIEN</h4>
 
@@ -53,6 +53,10 @@ function saveNewLink() {
 
 
 <style scoped>
+    @import '../assets/css/ModalDark.css';
+    @import '../assets/css/ModalLight.css';
+
+
     #modal-link {
         position: absolute;
         display: flex;
@@ -62,7 +66,6 @@ function saveNewLink() {
         top: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba(0, 0, 0, .5);
     }
 
     #modal-link form {
@@ -72,7 +75,6 @@ function saveNewLink() {
         min-height: max-content;
         width: 25vw;
         min-width: 320px;
-        background-color: #1b2125;
     }
 
     #modal-link form h4 {
@@ -81,7 +83,6 @@ function saveNewLink() {
         height: 40px;
         width: 100%;
         margin-bottom: 10px;
-        color: rgba(245, 245, 245, .2);
     }
 
     #modal-link form input {
@@ -101,8 +102,6 @@ function saveNewLink() {
     #modal-link form button.add {
         height: 40px;
         width: 100%;
-        background-color: #00796B;
-        color: whitesmoke;
         font-size: 1rem;
         font-weight: 600;
         margin-bottom: 10px;
@@ -111,7 +110,6 @@ function saveNewLink() {
     #modal-link form button.back-edit {
         height: 40px;
         width: 100%;
-        background-color: #FF1744;
         font-weight: 600;
         font-size: 1rem;
     }
