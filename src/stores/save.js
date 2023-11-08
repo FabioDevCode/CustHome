@@ -6,7 +6,7 @@ import { toast } from 'vue3-toastify';
 export const saveStore = defineStore('save', () => {
     const theme = ref('dark');
 
-    const widget = ref(true);
+    const widget = ref(false);
     const widgetList = ref(['Horloge', 'Google']);
 
     const defaultTab = ref('Home');
@@ -18,7 +18,7 @@ export const saveStore = defineStore('save', () => {
     // FUNCTIONS
     function synchroniseLocalSave(object) {
         theme.value = object.theme ? object.theme : 'dark';
-        widget.value = object.widget ? object.widget : true;
+        widget.value = object.widget ? object.widget : false;
         widgetList.value = object.widgetList ? object.widgetList : ['Horloge', 'Google'];
         defaultTab.value = object.defaultTab ? object.defaultTab : 'Home';
         tabs.value = object.tabs ? object.tabs : ['Home'];
