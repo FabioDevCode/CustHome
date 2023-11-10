@@ -102,7 +102,9 @@ export const saveStore = defineStore('save', () => {
     }
 
     function deleteLink(link) {
-        const index = linkViews.value[defaultTab.value].indexOf(link)
+        const thisLink = (el) => el.name == link.name;
+
+        const index = linkViews.value[defaultTab.value].findIndex(thisLink);
         linkViews.value[defaultTab.value].splice(index, 1);
 
         const localSave = JSON.parse(localStorage.getItem('CustHome'));

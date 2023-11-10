@@ -6,8 +6,8 @@ const mode = modeStore();
 const save = saveStore();
 
 
-function deleteThisLink(url, name) {
-    save.deleteLink({url, name});
+function deleteThisLink(name, url) {
+    save.deleteLink({name, url});
 }
 
 const props = defineProps({
@@ -30,7 +30,7 @@ const props = defineProps({
         <p v-if="props.name">{{ props.name }}</p>
         <svg v-if="!props.name && props.edit === 'edit'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M400 256H112"></path></svg>
         <span v-if="mode.edit && edit != 'edit'">
-            <button @click="deleteThisLink(props.url, props.name)">
+            <button @click="deleteThisLink(props.name, props.url)">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"></path><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path></g></svg>
             </button>
         </span>
