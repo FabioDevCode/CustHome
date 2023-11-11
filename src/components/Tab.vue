@@ -1,4 +1,6 @@
 <script setup>
+import btnAddTab from '@/components/btnAddTab.vue';
+
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
 
@@ -18,18 +20,13 @@ const save = saveStore();
                     {{ tab }}
                     <span>
                         <button class="btn-delete" @click="save.deleteTab(tab)">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"></path><path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path></g></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path d="M289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34z" fill="currentColor"></path></svg>
                         </button>
                     </span>
                 </button>
             </li>
-			<Transition>
-                <li v-if="mode.edit">
-                    <button id="add-onglet" class="add-onglet" @click="mode.toggleAddTab()">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M400 256H112"></path></svg>
-                    </button>
-                </li>
-            </Transition>
+
+            <btnAddTab />
         </ul>
     </div>
 </template>
@@ -75,8 +72,8 @@ const save = saveStore();
     }
 
     li button.todel:not(li span button.btn-delete ) {
+        padding-right: 45px;
         pointer-events: none;
-        margin-right: 25px;
     }
 
     li span {
@@ -86,11 +83,10 @@ const save = saveStore();
         left: 0;
         right: 0;
         bottom: 0;
-        height: 100%;
-        width: 100%;
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        margin-right: 10px;
     }
 
     li span button.btn-delete {
@@ -100,7 +96,7 @@ const save = saveStore();
         align-items: center;
         height: 24px !important;
         width: 24px !important;
-        margin-right: 10px;
+        margin-right: 5px;
         border-radius: 5px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }

@@ -33,11 +33,13 @@ export const modeStore = defineStore('mode', () => {
 
     const addtab = ref(false);
     function toggleAddTab() {
+        edit.value = false;
         addtab.value = !addtab.value;
     }
 
     const addLink = ref(false);
     function toggleAddLink() {
+        edit.value = false;
         addLink.value = !addLink.value;
     }
 

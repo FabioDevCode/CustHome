@@ -248,6 +248,7 @@ function importConfig(e) {
         background-color: #ECEFF1;
         box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.1);
         transition: all 0.3s ease;
+        /* overflow: hidden; */
     }
 
     .custom-checkbox .check-body .check-toggle {
@@ -258,11 +259,12 @@ function importConfig(e) {
         background-color: white;
         box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
         box-sizing: border-box;
+        margin-left: -1px;
         transition: transform 0.4s ease;
     }
 
     .custom-checkbox.active .check-toggle {
-        transform: translateX(100%);
+        transform: translateX(25px);
     }
 
 	.file-container {

@@ -14,9 +14,3 @@ a.light span button {
 a.light span button svg {
     color: whitesmoke;
 }
-
-#edit.light {
-    background-color: #9dd49f;
-    color: #00796B;
-    border: 1px dashed #00796B;
-}

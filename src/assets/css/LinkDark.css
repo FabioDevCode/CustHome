@@ -14,9 +14,3 @@ a.dark span button {
 a.dark span button svg {
     color: black;
 }
-
-#edit.dark {
-    background-color: #172819;
-    color: #00796B;
-    border: 1px dashed #00796B;
-}

@@ -19,9 +19,3 @@
 #tab-container.light ul li span button.btn-delete svg {
     color: whitesmoke;
 }
-
-#tab-container.light ul li button.add-onglet {
-    background-color: #9dd49f;
-    color: #00796B;
-    border: 1px dashed #00796B;
-}

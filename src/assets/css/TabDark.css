@@ -9,7 +9,7 @@
 }
 
 #tab-container.dark ul li span {
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .2);
 }
 
 #tab-container.dark ul li span button.btn-delete {
@@ -17,11 +17,5 @@
 }
 
 #tab-container.dark ul li span button.btn-delete svg {
-    color: black;
-}
-
-#tab-container.dark ul li button.add-onglet {
-    background-color: #172819;
-    color: #00796B;
-    border: 1px dashed #00796B;
+    color: whitesmoke;
 }

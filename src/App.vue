@@ -14,6 +14,7 @@ import Link from '@/components/Link.vue';
 import Tab from '@/components/Tab.vue';
 import ModalLink from '@/components/ModalLink.vue';
 import ModalTab from '@/components/ModalTab.vue';
+import btnAddLink from '@/components/btnAddLink.vue';
 
 
 const mode = modeStore()
@@ -65,27 +66,18 @@ onMounted(() => {
 				<div v-if="save.widget" id="pro-link" class="global">
 					<div class="container-link">
 						<Link class="link" :url="link.url" :name="link.name" :key="link.name" v-for="link in save.linkViews[save.defaultTab]" />
-						<Transition>
-							<Link v-if="mode.edit" class="link edit" edit="edit" @click="mode.toggleAddLink()" />
-						</Transition>
+						<btnAddLink />
 					</div>
 				</div>
 				<div v-else id="pro-link" class="global without-widget">
 					<div class="container-link">
 						<Link class="link" :url="link.url" :name="link.name" :key="link.name" v-for="link in save.linkViews[save.defaultTab]" />
-						<Transition>
-							<Link v-if="mode.edit" class="link edit" edit="edit" @click="mode.toggleAddLink()" />
-						</Transition>
+						<btnAddLink />
 					</div>
 				</div>
 			</Transition>
-
-
-
 		</main>
 	</section>
-
-
 
 	<Transition name="slide-fade">
 		<Menu />
@@ -127,8 +119,55 @@ onMounted(() => {
 		background-color: var(--light-bg);
 	}
 
+	/*-------SCROLL-------*/
+	#dark * {
+		scrollbar-width: thin;
+		scrollbar-color: rgb(30, 30, 30) rgb(255, 255, 255, .2);
+    }
+
+	#dark ::-webkit-scrollbar-track {
+		background: rgba(125, 125, 125, .1);
+		border-radius: 50px;
+	}
+
+	#dark ::-webkit-scrollbar-thumb {
+        background: whitesmoke;
+        border-radius: 50px;
+    }
+
+	#light * {
+		scrollbar-width: thin;
+		scrollbar-color: rgb(30, 30, 30) rgb(255, 255, 255, .2);
+    }
+
+	#light ::-webkit-scrollbar-track {
+		background: rgba(125, 125, 125, .2);
+		border-radius: 50px;
+	}
+
+	#light ::-webkit-scrollbar-thumb {
+        background: #18181C;
+        border-radius: 50px;
+    }
+
+    *::-webkit-scrollbar {
+        width: 8px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-button {
+        width: 0px;
+        height: 0px;
+    }
+
+    ::selection {
+        background-color: transparent;
+        color: white;
+    }
 
 
+
+	/* STYLE */
 	.global {
 		overflow: hidden;
 		padding: 10px;
@@ -151,7 +190,8 @@ onMounted(() => {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
 		grid-gap: 10px;
-		grid-template-rows: repeat(8, 1fr);
+		/* grid-template-rows: repeat(8, 1fr); */
+		grid-template-rows: repeat(7, 1fr);
 	}
 
 	/* PRO TEMPLATE */
@@ -203,8 +243,8 @@ onMounted(() => {
 		/*  */
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
-		grid-gap: 10px;
-		grid-template-rows: repeat(2, 1fr);
+		grid-gap: 5px;
+		grid-template-rows: repeat(auto, 1fr);
 	}
 
 	#pro-title.without-widget {
