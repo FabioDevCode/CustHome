@@ -166,7 +166,6 @@ onMounted(() => {
     }
 
 
-
 	/* STYLE */
 	.global {
 		overflow: hidden;

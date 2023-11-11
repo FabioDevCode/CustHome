@@ -35,6 +35,7 @@ function saveNewLink() {
 
 <template>
     <div id="modal-link" v-if="mode.addLink" :class="save.theme">
+        <span id="overlay-close" @click="mode.closeAddLink()"></span>
         <form @submit.prevent>
             <h4>LIEN</h4>
 
@@ -44,10 +45,11 @@ function saveNewLink() {
             <button class="add" @click="saveNewLink()">
                 Ajouter le lien à {{ save.defaultTab }}
             </button>
-            <button class="back-edit" @click="mode.toggleAddLink()">
+            <button class="back-edit" @click="mode.closeAddLink()">
                 Fermer
             </button>
         </form>
+        <span id="overlay-close-2"></span>
     </div>
 </template>
 
@@ -68,7 +70,18 @@ function saveNewLink() {
         width: 100%;
     }
 
+    #overlay-close {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 20%;
+        background-color: transparent;
+        width: 100%
+    }
+
     #modal-link form {
+        z-index: 10000;
         border-radius: 10px;
         padding: 10px;
         height: max-content;

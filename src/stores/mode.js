@@ -14,34 +14,60 @@ export const modeStore = defineStore('mode', () => {
     function setHobbie() {
         mode.value = 'hobbie'
     }
-    function toggleMenu() {
-        edit.value = false;
-        menu.value = !menu.value;
-    }
     function toggleMenuWidget() {
         menu_widget.value = !menu_widget.value;
     }
 
 
 
-
+    function openMenu() {
+        edit.value = false;
+        addtab.value = false;
+        addLink.value = false;
+        menu.value = true;
+    }
+    function closeMenu() {
+        edit.value = false;
+        menu.value = false;
+        addtab.value = false;
+        addLink.value = false;
+    }
 
     const edit = ref(false);
     function toggleEdit() {
         edit.value = !edit.value;
     }
 
+
     const addtab = ref(false);
     function toggleAddTab() {
         edit.value = false;
         addtab.value = !addtab.value;
     }
+    function openAddTab() {
+        edit.value = false;
+        addLink.value = false;
+        addtab.value = true;
+    }
+    function closeAddTab() {
+        edit.value = false;
+        addLink.value = false;
+        addtab.value = false;
+    }
+
 
     const addLink = ref(false);
-    function toggleAddLink() {
+    function openAddLink() {
         edit.value = false;
-        addLink.value = !addLink.value;
+        addtab.value = false;
+        addLink.value = true;
     }
+    function closeAddLink() {
+        edit.value = false;
+        addtab.value = false;
+        addLink.value = false;
+    }
+
 
 
     return {
@@ -49,14 +75,18 @@ export const modeStore = defineStore('mode', () => {
         setPro,
         setHobbie,
         menu,
-        toggleMenu,
+        openMenu,
+        closeMenu,
         menu_widget,
         toggleMenuWidget,
         edit,
         toggleEdit,
         addtab,
         toggleAddTab,
+        openAddTab,
+        closeAddTab,
         addLink,
-        toggleAddLink
+        openAddLink,
+        closeAddLink
     }
 });

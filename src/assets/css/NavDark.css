@@ -3,6 +3,16 @@
     color: black;
 }
 
+.dark ul li button.active {
+    background-color: crimson;
+    color: whitesmoke;
+}
+
+.dark ul li button.active:hover {
+    background-color: crimson;
+    color: black;
+}
+
 .dark ul li button:hover {
     background-color: #ECEFF1;
 }

@@ -28,6 +28,7 @@ function addNewTabWithResetInput() {
 
 <template>
     <div id="modal-tab" v-if="mode.addtab" :class="save.theme">
+        <span id="overlay-close" @click="mode.closeAddTab()"></span>
         <form @submit.prevent>
             <h4>ONGLET</h4>
 
@@ -36,7 +37,7 @@ function addNewTabWithResetInput() {
             <button class="add" @click="addNewTabWithResetInput()">
                 Ajouter l'onglet
             </button>
-            <button class="back-edit" @click="mode.toggleAddTab()">
+            <button class="back-edit" @click="mode.closeAddTab()">
                 Fermer
             </button>
         </form>
@@ -61,7 +62,17 @@ function addNewTabWithResetInput() {
         width: 100%;
     }
 
+    #overlay-close {
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 20%;
+        background-color: transparent;
+        width: 100%
+    }
+
     #modal-tab form {
+        z-index: 10000;
         border-radius: 10px;
         padding: 10px;
         height: max-content;
