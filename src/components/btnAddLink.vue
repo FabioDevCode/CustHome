@@ -46,24 +46,26 @@ const save = saveStore();
     #edit.dark {
         background: transparent;
         color: #00796B;
-        border: 1px dashed #00796B;
+        border: 1px dashed #172819;
         filter: grayscale(1);
     }
 
     #edit.dark:hover {
         background-color: #172819;
+        border: 1px dashed #00796B;
         filter: grayscale(0);
     }
 
     #edit.light {
         background: transparent;
         color: #00796B;
-        border: 1px dashed #00796B;
+        border: 1px dashed #9dd49f;
         filter: grayscale(1);
     }
 
     #edit.light:hover {
         background-color: #9dd49f;
+        border: 1px dashed #00796B;
         filter: grayscale(0);
     }
 </style>

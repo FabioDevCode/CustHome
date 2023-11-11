@@ -40,24 +40,26 @@ const save = saveStore();
     li.dark button.add-onglet {
         background-color: transparent;
         color: #00796B;
-        border: 1px dashed #00796B;
+        border: 1px dashed #172819;
         filter: grayscale(1);
     }
 
     li.dark button.add-onglet:hover {
         background-color: #172819;
+        border: 1px dashed #00796B;
         filter: grayscale(0);
     }
 
     li.light button.add-onglet {
         background-color: transparent;
         color: #00796B;
-        border: 1px dashed #00796B;
+        border: 1px dashed #9dd49f;
         filter: grayscale(1);
     }
 
     li.light button.add-onglet:hover {
         background-color: #9dd49f;
+        border: 1px dashed #00796B;
         filter: grayscale(0);
     }
 
