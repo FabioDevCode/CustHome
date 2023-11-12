@@ -16,7 +16,7 @@ export const saveStore = defineStore('save', () => {
 
     // FUNCTIONS
     function synchroniseLocalSave(object) {
-        version.value = object.version ? object.version : version.value;
+        version.value = object.version ? object.version : '1.0.0';
         theme.value = object.theme ? object.theme : 'dark';
         widget.value = object.widget ? object.widget : true;
         widgetList.value = object.widgetList ? object.widgetList : ['Horloge', 'Google'];
@@ -27,8 +27,37 @@ export const saveStore = defineStore('save', () => {
 
     function controlImport(object) {
         const acceptedKey = ['version', 'theme', 'widget', 'widgetList', 'defaultTab', 'tabs', 'linkViews'];
+        const authorizedThemeValue = ['dark', 'light'];
+        const typeKey = {
+            version: 'string',
+            theme: 'string',
+            widget: 'boolean',
+            widgetList: 'array',
+            defaultTab: 'string',
+            tabs: 'array',
+            linkViews: 'object'
+        }
         for(const [key, value] of Object.entries(object)) {
             if(!acceptedKey.includes(key)) {
+                return false;
+            }
+            switch(typeKey[key]) {
+                case 'string':
+                case 'object':
+                case 'boolean':
+                    if(!typeof value === typeKey[key]) {
+                        return false;
+                    }
+                    break;
+                case 'array':
+                    if(!Array.isArray(value)) {
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+            if(key === 'theme' && !authorizedThemeValue.includes(value)) {
                 return false;
             }
         }
