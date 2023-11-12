@@ -27,6 +27,7 @@ onMounted(() => {
 		save.synchroniseLocalSave(localSave);
 	} else {
 		localStorage.setItem('CustHome', JSON.stringify({
+			version: save.version,
 			theme: save.theme,
 			widget: save.widget,
 			widgetList: save.widgetList,

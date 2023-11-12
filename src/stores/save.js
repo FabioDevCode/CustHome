@@ -4,11 +4,10 @@ import { toast } from 'vue3-toastify';
 
 
 export const saveStore = defineStore('save', () => {
+    const version = ref('1.0.0');
     const theme = ref('dark');
-
-    const widget = ref(false);
+    const widget = ref(true);
     const widgetList = ref(['Horloge', 'Google']);
-
     const defaultTab = ref('Home');
     const tabs = ref(['Home']);
     const linkViews = ref({Home: []});
@@ -17,13 +16,24 @@ export const saveStore = defineStore('save', () => {
 
     // FUNCTIONS
     function synchroniseLocalSave(object) {
+        version.value = object.version ? object.version : version.value;
         theme.value = object.theme ? object.theme : 'dark';
-        widget.value = object.widget ? object.widget : false;
+        widget.value = object.widget ? object.widget : true;
         widgetList.value = object.widgetList ? object.widgetList : ['Horloge', 'Google'];
         defaultTab.value = object.defaultTab ? object.defaultTab : 'Home';
         tabs.value = object.tabs ? object.tabs : ['Home'];
         linkViews.value = object.linkViews ? object.linkViews : {Home: []};
     };
+
+    function controlImport(object) {
+        const acceptedKey = ['version', 'theme', 'widget', 'widgetList', 'defaultTab', 'tabs', 'linkViews'];
+        for(const [key, value] of Object.entries(object)) {
+            if(!acceptedKey.includes(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     function importConfig(object) {
         synchroniseLocalSave(object);
@@ -121,7 +131,9 @@ export const saveStore = defineStore('save', () => {
 
 
     return {
+        version,
         synchroniseLocalSave,
+        controlImport,
         importConfig,
         widget,
         toggleWidget,

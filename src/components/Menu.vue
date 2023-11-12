@@ -29,13 +29,26 @@ function exportConfig() {
 
 function dropHandler(e) {
     e.preventDefault();
-    if(e.dataTransfer.items) {
+    if(e.dataTransfer.items.length > 1) {
+        toast.error("Veuillez importer un seul fichier.", {
+            theme: 'dark',
+            position: 'bottom-left',
+            autoClose: 5000,
+        });
+    } else if(e.dataTransfer.items.length == 1) {
         [...e.dataTransfer.items].forEach((item, i) => {
             if (item.kind === "file") {
                 const file = item.getAsFile();
                 const reader = new FileReader();
                 reader.readAsText(file);
                 reader.onload = function() {
+                    if(!save.controlImport(JSON.parse(reader.result))) {
+                        return toast.error("Le fichier importé n'est pas une config CustHome.", {
+                            theme: 'dark',
+                            position: 'bottom-left',
+                            autoClose: 5000,
+                        });
+                    }
                     save.importConfig(JSON.parse(reader.result));
                 }
                 reader.onerror = function() {
@@ -61,6 +74,13 @@ function importConfig(e) {
     const reader = new FileReader();
     reader.readAsText(file);
     reader.onload = function() {
+        if(!save.controlImport(JSON.parse(reader.result))) {
+            return toast.error("Le fichier importé n'est pas une config CustHome.", {
+                theme: 'dark',
+                position: 'bottom-left',
+                autoClose: 5000,
+            });
+        }
         save.importConfig(JSON.parse(reader.result));
     }
     reader.onerror = function() {
