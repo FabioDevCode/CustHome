@@ -5,6 +5,49 @@ import { saveStore } from '@/stores/save';
 const mode = modeStore()
 const save = saveStore()
 
+const arrayOfColors = [
+    {
+        color: '#F4EBD9',
+        name: 'Beige claire'
+    },
+    {
+        color: '#ECEFF1',
+        name: 'Blanc'
+    },
+    {
+        color: '#1E88E5',
+        name: 'Bleu'
+    },
+    {
+        color: '#BFD7EA',
+        name: 'Bleu pâle'
+    },
+    {
+        color: '#151515',
+        name: 'Noir'
+    },
+    {
+        color: '#F79256',
+        name: 'Orange claire'
+    },
+    {
+        color: '#FFC6D9',
+        name: 'Rose claire'
+    },
+    {
+        color: '#88B7B5',
+        name: 'Turquoise pâle'
+    },
+    {
+        color: '#9EE493',
+        name: 'Vert claire'
+    },
+    {
+        color: '#F0D3F7',
+        name: 'Violet claire'
+    },
+];
+
 
 function switchTheme() {
     const swithToggle = document.querySelector('#theme');
@@ -28,9 +71,6 @@ function changeBgColor(e) {
     save.saveBgColor(e.target.value);
 }
 
-function changeGlobalColor(e) {
-    save.saveGlobalColor(e.target.value);
-}
 
 
 // EXPORT CONFIG
@@ -143,34 +183,14 @@ function importConfig(e) {
 
                 <div class="custom-checkbox column" v-if="save.customColor">
                     <div class="blockin">
-                        <label for="back-select">Background color :</label>
+                        <label for="back-select">Couleur de fond :</label>
                         <select name="back" id="back-select" @change="changeBgColor">
-                            <option value="">-- Choisir une couleur --</option>
-                            <option value="#0D47A1">Bleu</option>
-                            <option value="#adcbe3">Bleu claire</option>
-                            <option value="#f0e4e4">Beige</option>
-                            <option value="#fec8c1">Rose pale</option>
-                            <option value="#35605A">Vert</option>
-                            <option value="#ECEFF1">Gris claire</option>
-                            <option value="#29a8ab">Turquoise</option>
-                            <option value="#cc2a36">Rouge</option>
-                            <option value="#151515">Noir</option>
-                        </select>
-                    </div>
-
-                    <div class="blockin">
-                        <label for="bloc-select">Block color :</label>
-                        <select name="bloc" id="bloc-select" @change="changeGlobalColor">
-                            <option value="">-- Choisir une couleur --</option>
-                            <option value="#0D47A1">Bleu</option>
-                            <option value="#adcbe3">Bleu claire</option>
-                            <option value="#f0e4e4">Beige</option>
-                            <option value="#fec8c1">Rose pale</option>
-                            <option value="#35605A">Vert</option>
-                            <option value="#ECEFF1">Gris claire</option>
-                            <option value="#29a8ab">Turquoise</option>
-                            <option value="#cc2a36">Rouge</option>
-                            <option value="#151515">Noir</option>
+                            <option v-for="opt in arrayOfColors"
+                            :key="opt.name"
+                            :value="opt.color"
+                            :selected="save.colors.bg_color == opt.color">
+                                {{ opt.name }}
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -303,7 +323,7 @@ function importConfig(e) {
         margin-top: 10px;
         padding: 0 0 20px 10px;
         font-weight: 600;
-        border-bottom: 1px solid #212a37;
+        border-bottom: 1px solid #36474F;
     }
 
     .custom-checkbox {
@@ -311,10 +331,11 @@ function importConfig(e) {
         align-items: center;
         justify-content: space-between;
         padding: 10px;
-        border-bottom: 1px solid #212a37;
+        border-bottom: 1px solid #36474F;
     }
 
     .column {
+        padding-top: 0px;
         flex-direction: column;
     }
 
@@ -323,7 +344,7 @@ function importConfig(e) {
         justify-content: space-between;
         align-items: center;
         min-height: max-content;
-        padding: 5px 0;
+        padding: 0 0 5px 0;
         width: 100%;
     }
 
@@ -378,13 +399,18 @@ function importConfig(e) {
         transform: translateX(25px);
     }
 
+    #color_custom.active {
+        border-bottom: 1px solid transparent;
+
+    }
+
 	.file-container {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
 		padding: 10px;
-        margin-top: 40px;
+        margin-top: 20px;
 	}
 
 	.file-container label {
@@ -427,11 +453,12 @@ function importConfig(e) {
 		font-weight: 400;
 		height: 50px;
 		width: auto;
-		margin: 40px 10px 0px 10px;
+		margin: 20px 10px 0px 10px;
 		border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25), inset -2px -2px 2px rgba(33,33,33,0.1);
 	}
 
     #export-save svg {
