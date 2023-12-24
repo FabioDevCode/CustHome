@@ -11,6 +11,11 @@ export const saveStore = defineStore('save', () => {
     const defaultTab = ref('Home');
     const tabs = ref(['Home']);
     const linkViews = ref({Home: []});
+    const customColor = ref(false);
+    const colors = ref({
+        bg_color: "#151515",
+        gl_color: "#151515"
+    });
 
 
 
@@ -23,6 +28,22 @@ export const saveStore = defineStore('save', () => {
         defaultTab.value = object.defaultTab ? object.defaultTab : 'Home';
         tabs.value = object.tabs ? object.tabs : ['Home'];
         linkViews.value = object.linkViews ? object.linkViews : {Home: []};
+        customColor.value = object.customColor ? object.customColor : false;
+        colors.value = object.colors ? object.colors : {bg_color: "#151515",gl_color: "#151515"};
+    };
+
+    function getInitialConfig() {
+        return {
+            version: version.value,
+            theme: theme.value,
+            widget: widget.value,
+            widgetList: widgetList.value,
+            defaultTab: defaultTab.value,
+            tabs: tabs.value,
+            linkViews: linkViews.value,
+            customColor: customColor.value,
+            colors: colors.value,
+        }
     };
 
     function controlImport(object) {
@@ -35,8 +56,11 @@ export const saveStore = defineStore('save', () => {
             widgetList: 'array',
             defaultTab: 'string',
             tabs: 'array',
-            linkViews: 'object'
+            linkViews: 'object',
+            customColor: 'boolean',
+            colors: 'array'
         }
+
         for(const [key, value] of Object.entries(object)) {
             if(!acceptedKey.includes(key)) {
                 return false;
@@ -157,10 +181,61 @@ export const saveStore = defineStore('save', () => {
         });
     }
 
+    function toggleCustomColor() {
+        customColor.value = !customColor.value
+
+        if(customColor.value == false) {
+            document.documentElement.style.setProperty('--dark-bg', '#151515');
+            document.documentElement.style.setProperty('--light-bg', '#ECEFF1');
+            document.documentElement.style.setProperty('--dark-bg-global', '#151515');
+            document.documentElement.style.setProperty('--light-bg-global', '#ECEFF1');
+
+            const localSave = JSON.parse(localStorage.getItem('CustHome'));
+
+            switch(theme.value) {
+                case 'dark':
+                    colors.value.bg_color = '#151515';
+                    colors.value.gl_color = '#151515';
+                    localSave.colors.bg_color = '#151515';
+                    localSave.colors.gl_color = '#151515';
+                    break;
+                case 'light':
+                    colors.value.bg_color = '#ECEFF1';
+                    colors.value.gl_color = '#ECEFF1';
+                    localSave.colors.bg_color = '#ECEFF1';
+                    localSave.colors.gl_color = '#ECEFF1';
+                    break;
+            }
+
+            localStorage.setItem('CustHome', JSON.stringify(localSave));
+        }
+    }
+
+    function saveBgColor(color) {
+        colors.value.bg_color = color;
+        document.documentElement.style.setProperty('--dark-bg', color);
+        document.documentElement.style.setProperty('--light-bg', color);
+
+        const localSave = JSON.parse(localStorage.getItem('CustHome'));
+        localSave.colors.bg_color = color;
+        localStorage.setItem('CustHome', JSON.stringify(localSave));
+    }
+
+    function saveGlobalColor(color) {
+        colors.value.gl_color = color;
+        document.documentElement.style.setProperty('--dark-bg-global', color);
+        document.documentElement.style.setProperty('--light-bg-global', color);
+
+        const localSave = JSON.parse(localStorage.getItem('CustHome'));
+        localSave.colors.gl_color = color;
+        localStorage.setItem('CustHome', JSON.stringify(localSave));
+    };
+
 
 
     return {
         version,
+        getInitialConfig,
         synchroniseLocalSave,
         controlImport,
         importConfig,
@@ -175,6 +250,11 @@ export const saveStore = defineStore('save', () => {
         deleteTab,
         linkViews,
         addNewLink,
-        deleteLink
+        deleteLink,
+        customColor,
+        toggleCustomColor,
+        colors,
+        saveBgColor,
+        saveGlobalColor
     }
 });

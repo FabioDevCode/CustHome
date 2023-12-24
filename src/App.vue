@@ -26,15 +26,7 @@ onMounted(() => {
 	if(localSave && Object.entries(localSave).length) {
 		save.synchroniseLocalSave(localSave);
 	} else {
-		localStorage.setItem('CustHome', JSON.stringify({
-			version: save.version,
-			theme: save.theme,
-			widget: save.widget,
-			widgetList: save.widgetList,
-			defaultTab: save.defaultTab,
-			tabs: save.tabs,
-			linkViews:  save.linkViews
-		}))
+		localStorage.setItem('CustHome', JSON.stringify(save.getInitialConfig()))
 	}
 });
 </script>
@@ -102,10 +94,9 @@ onMounted(() => {
 	}
 	#dark main {
 		background-color: var(--dark-bg);
-		background-color: transparent;
 	}
 	#dark main .global {
-		background-color: var(--dark-bg);
+		background-color: var(--dark-bg-global);
 	}
 
 	/* LIGHT THEME */
@@ -114,10 +105,9 @@ onMounted(() => {
 	}
 	#light main {
 		background-color: var(--light-bg);
-		background-color: transparent;
 	}
 	#light main .global {
-		background-color: var(--light-bg);
+		background-color: var(--light-bg-global);
 	}
 
 	/*-------SCROLL-------*/

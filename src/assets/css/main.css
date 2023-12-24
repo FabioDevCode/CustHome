@@ -1,12 +1,24 @@
 :root {
+	/* DARK MODE */
 	--dark-bg: #151515;
+	--dark-bg-global: #151515;
+
+
 	--light-btn: #CFD8DC; /* blue-grey-lighten-4 */
 	--light-btn-hov: #ECEFF1; /* blue-grey-lighten-5 */
-
 	--main-color: #1E88E5; /* blue-darken-1 */
 	--main-color-hov: #42A5F5; /* blue-lighten-1 */
 
+
+
+	/* LIGHT MODE */
 	--light-bg: #ECEFF1;
+	--light-bg-global: #ECEFF1;
+
+
+
+
+
 }
 
 * {
@@ -35,6 +47,12 @@ button {
 
 ul, ol, li {
 	list-style: none;
+}
+
+select {
+	appearance: none;
+	border: 0;
+	outline: 0;
 }
 
 body {

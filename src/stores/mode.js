@@ -7,7 +7,6 @@ export const modeStore = defineStore('mode', () => {
     const menu = ref(false);
     const menu_widget = ref(false);
 
-
     function setPro() {
         mode.value = 'pro'
     }
@@ -37,7 +36,6 @@ export const modeStore = defineStore('mode', () => {
     function toggleEdit() {
         edit.value = !edit.value;
     }
-
 
     const addtab = ref(false);
     function toggleAddTab() {
@@ -70,6 +68,8 @@ export const modeStore = defineStore('mode', () => {
 
 
 
+
+
     return {
         mode,
         setPro,
@@ -87,6 +87,6 @@ export const modeStore = defineStore('mode', () => {
         closeAddTab,
         addLink,
         openAddLink,
-        closeAddLink
+        closeAddLink,
     }
 });

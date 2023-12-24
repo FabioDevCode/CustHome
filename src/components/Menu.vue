@@ -11,10 +11,25 @@ function switchTheme() {
     swithToggle.classList.toggle('active');
     save.toggleTheme();
 }
+
 function switchWidget() {
     const switchWidget = document.querySelector('#widget');
     switchWidget.classList.toggle('active');
     save.toggleWidget();
+}
+
+function switchCustomColor() {
+    const switchCustomColor = document.querySelector('#color_custom');
+    switchCustomColor.classList.toggle('active');
+    save.toggleCustomColor();
+}
+
+function changeBgColor(e) {
+    save.saveBgColor(e.target.value);
+}
+
+function changeGlobalColor(e) {
+    save.saveGlobalColor(e.target.value);
 }
 
 
@@ -104,7 +119,7 @@ function importConfig(e) {
             </button>
 
             <section class="menu-body">
-                <h3>PARAMETRES PAR DEFAUT</h3>
+                <h3>PARAMETRES</h3>
 
                 <div>
                     <label id="theme" class="custom-checkbox" :class="{active: save.theme == 'dark'}">
@@ -117,6 +132,50 @@ function importConfig(e) {
                 </div>
 
                 <div>
+                    <label id="color_custom" class="custom-checkbox" :class="{active: save.customColor}">
+                        <span class="label-text">Couleurs personnalisées</span>
+                        <input type="checkbox" @click="switchCustomColor()">
+                        <span class="check-body">
+                            <span class="check-toggle"></span>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="custom-checkbox column" v-if="save.customColor">
+                    <div class="blockin">
+                        <label for="back-select">Background color :</label>
+                        <select name="back" id="back-select" @change="changeBgColor">
+                            <option value="">-- Choisir une couleur --</option>
+                            <option value="#0D47A1">Bleu</option>
+                            <option value="#adcbe3">Bleu claire</option>
+                            <option value="#f0e4e4">Beige</option>
+                            <option value="#fec8c1">Rose pale</option>
+                            <option value="#35605A">Vert</option>
+                            <option value="#ECEFF1">Gris claire</option>
+                            <option value="#29a8ab">Turquoise</option>
+                            <option value="#cc2a36">Rouge</option>
+                            <option value="#151515">Noir</option>
+                        </select>
+                    </div>
+
+                    <div class="blockin">
+                        <label for="bloc-select">Block color :</label>
+                        <select name="bloc" id="bloc-select" @change="changeGlobalColor">
+                            <option value="">-- Choisir une couleur --</option>
+                            <option value="#0D47A1">Bleu</option>
+                            <option value="#adcbe3">Bleu claire</option>
+                            <option value="#f0e4e4">Beige</option>
+                            <option value="#fec8c1">Rose pale</option>
+                            <option value="#35605A">Vert</option>
+                            <option value="#ECEFF1">Gris claire</option>
+                            <option value="#29a8ab">Turquoise</option>
+                            <option value="#cc2a36">Rouge</option>
+                            <option value="#151515">Noir</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
                     <label id="widget" class="custom-checkbox" :class="{active: save.widget}">
                         <span class="label-text">Widgets</span>
                         <input type="checkbox" @click="switchWidget()">
@@ -125,7 +184,6 @@ function importConfig(e) {
                         </span>
                     </label>
                 </div>
-
 
                 <div class="file-container" @drop="dropHandler" @dragover="dragOverHandler">
                     <label for="dropzone-file">
@@ -188,7 +246,7 @@ function importConfig(e) {
 
     #overlay-close {
         position: absolute;
-        background: transparent;
+        background-color: transparent;
         top: 0;
         left: 0;
         height: 100%;
@@ -199,7 +257,7 @@ function importConfig(e) {
 		height: 100%;
 		width: min(100%, 400px);
 		border-radius: 10px;
-		padding: 15px;
+		padding: 10px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
@@ -256,6 +314,29 @@ function importConfig(e) {
         border-bottom: 1px solid #212a37;
     }
 
+    .column {
+        flex-direction: column;
+    }
+
+    .blockin {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: max-content;
+        padding: 5px 0;
+        width: 100%;
+    }
+
+    .blockin label {
+        font-size: .9em;
+    }
+
+    select {
+        height: 30px;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
     .custom-checkbox input[type=checkbox] {
         display: none;
     }
@@ -287,7 +368,7 @@ function importConfig(e) {
         width: 24px;
         height: 24px;
         background-color: white;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25), inset -2px -2px 2px rgba(33,33,33,0.1);
         box-sizing: border-box;
         margin-left: -1px;
         transition: transform 0.4s ease;
