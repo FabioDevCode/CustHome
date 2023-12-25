@@ -1,17 +1,21 @@
 <script setup>
 import { modeStore } from '@/stores/mode';
 import { saveStore } from '@/stores/save';
-import LogoCustHome from '@/components/LogoCustHome.vue';
 
 const mode = modeStore()
 const save = saveStore()
 
-</script>
+function editTitle() {
+    save.updateTitle(document.querySelector('#title').innerText);
+};
 
+</script>
 
 <template>
     <nav :class="save.theme">
-		<LogoCustHome class="nav-logo" />
+        <h1 class="nav-logo" id="title" contenteditable="true" @keyup.stop="editTitle()">
+            {{ save.title }}
+        </h1>
 
         <ul>
             <li id="eidt">
@@ -42,6 +46,18 @@ const save = saveStore()
         justify-content: space-between;
         align-items: center;
     }
+
+    nav h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Chakra Petch', sans-serif;
+        height: 100%;
+        min-width: 30px;
+        font-size: 1.8em;
+        border-radius: 5px;
+    }
+
 
     nav ul {
         height: max-content;

@@ -4,6 +4,7 @@ import { toast } from 'vue3-toastify';
 
 
 export const saveStore = defineStore('save', () => {
+    const title = ref('CustHome');
     const version = ref('1.0.0');
     const theme = ref('dark');
     const widget = ref(true);
@@ -19,6 +20,7 @@ export const saveStore = defineStore('save', () => {
 
     // FUNCTIONS
     function synchroniseLocalSave(object) {
+        title.value = object.title ? object.title : 'CustHome';
         version.value = object.version ? object.version : '1.0.0';
         theme.value = object.theme ? object.theme : 'dark';
         widget.value = object.widget ? object.widget : true;
@@ -37,6 +39,7 @@ export const saveStore = defineStore('save', () => {
 
     function getInitialConfig() {
         return {
+            title: title.value,
             version: version.value,
             theme: theme.value,
             widget: widget.value,
@@ -100,6 +103,13 @@ export const saveStore = defineStore('save', () => {
             autoClose: 3000,
         });
     }
+
+    function updateTitle(newTitle) {
+        title.value = newTitle;
+        const localSave = JSON.parse(localStorage.getItem('CustHome'));
+        localSave.title = title.value;
+        localStorage.setItem('CustHome', JSON.stringify(localSave));
+    };
 
     function toggleWidget() {
         widget.value = !widget.value;
@@ -237,6 +247,8 @@ export const saveStore = defineStore('save', () => {
 
 
     return {
+        title,
+        updateTitle,
         version,
         getInitialConfig,
         synchroniseLocalSave,
