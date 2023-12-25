@@ -53,9 +53,21 @@ export const saveStore = defineStore('save', () => {
     };
 
     function controlImport(object) {
-        const acceptedKey = ['version', 'theme', 'widget', 'widgetList', 'defaultTab', 'tabs', 'linkViews'];
+        const acceptedKey = [
+            'title',
+            'version',
+            'theme',
+            'widget',
+            'widgetList',
+            'defaultTab',
+            'tabs',
+            'linkViews',
+            'customColor',
+            'colors'
+        ];
         const authorizedThemeValue = ['dark', 'light'];
         const typeKey = {
+            title: 'string',
             version: 'string',
             theme: 'string',
             widget: 'boolean',
