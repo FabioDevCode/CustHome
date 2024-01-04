@@ -13,9 +13,7 @@ export const saveStore = defineStore('save', () => {
     const tabs = ref(['Home']);
     const linkViews = ref({Home: []});
     const customColor = ref(false);
-    const colors = ref({
-        bg_color: "#151515"
-    });
+    const colors = ref({bg_color: "#151515"});
 
 
     // FUNCTIONS
@@ -76,7 +74,7 @@ export const saveStore = defineStore('save', () => {
             tabs: 'array',
             linkViews: 'object',
             customColor: 'boolean',
-            colors: 'array'
+            colors: 'object'
         }
 
         for(const [key, value] of Object.entries(object)) {
