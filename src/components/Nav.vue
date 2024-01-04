@@ -41,7 +41,7 @@ function editTitle() {
     nav {
         overflow: hidden;
         width: 100%;
-        height: 30px;
+        height: 35px;
         display: flex;
         justify-content: space-between;
         align-items: center;
