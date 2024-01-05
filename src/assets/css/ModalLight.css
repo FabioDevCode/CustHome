@@ -11,7 +11,8 @@
 }
 
 #modal-link.light form button.add, #modal-tab.light form button.add {
-    background-color: #00796B;
+    /* background-color: #00796B; */
+    background-color: #0D47A1;
     color: whitesmoke;
 }
 
